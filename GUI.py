@@ -46,12 +46,12 @@ from visuals import create_visuals
 tool_version = "1.0.0"
 
 root = customtkinter.CTk()
-root.title(f"Fayaz's Settings {tool_version} for Super Mario Odyssey")
+root.title(f"Fayaz's Settings {tool_version} for Mario Kart 8 Deluxe")
 root.geometry("500x720")
 
 customtkinter.set_appearance_mode("system")
 customtkinter.set_default_color_theme("blue")  
-windowtitle = customtkinter.CTkLabel(master=root, font=(CTkFont, 20), text="Fayaz's SMO Utility {tool_version}")
+windowtitle = customtkinter.CTkLabel(master=root, font=(CTkFont, 20), text="Fayaz's MK8D Utility {tool_version}")
 
 ###############################################
 ###########    GLOBAL SETTINGS      ###########
@@ -303,10 +303,10 @@ def select_mario_folder():
     scaling_factor = (16/9) / (int(numerator_entry.get()) / int(denominator_entry.get()))
     username = getpass.getuser()
     if output_yuzu.get() is True:
-        input_folder = f"C:/Users/{username}/AppData/Roaming/yuzu/load/0100000000010000"
+        input_folder = f"C:/Users/{username}/AppData/Roaming/yuzu/load/0100152000022000"
         process_name = "yuzu.exe"
     if output_ryujinx.get() is True:
-        input_folder = f"C:/Users/{username}/AppData/Roaming/Ryujinx/mods/contents/0100000000010000"
+        input_folder = f"C:/Users/{username}/AppData/Roaming/Ryujinx/mods/contents/0100152000022000"
         process_name = "ryujinx.exe"
     else:
         process_name = "yuzu.exe"

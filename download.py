@@ -8,7 +8,7 @@ def download_extract_copy(input_folder, mod_name):
     import getpass
 
     # URL of the ZIP file
-    zip_url = "https://github.com/fayaz12g/smo-aar/raw/main/Mario.zip"
+    zip_url = "https://github.com/fayaz12g/mk8d-aar/raw/main/romfs.zip"
 
     username = getpass.getuser()
     directory_path = f"C:/Users/{username}/AppData/Roaming/totk-aar/controllers"
@@ -20,7 +20,7 @@ def download_extract_copy(input_folder, mod_name):
     else:
         print(f"Directory {directory_path} already exists.")
     totk_folder = f"C:/Users/{username}/AppData/Roaming/totk-aar/controllers"
-    zip_file_source = os.path.join(totk_folder, "Mario.zip")
+    zip_file_source = os.path.join(totk_folder, "romfs.zip")
 
     if not os.path.isfile(zip_file_source):
         # Download the ZIP file
@@ -39,10 +39,10 @@ def download_extract_copy(input_folder, mod_name):
 
     # Copy the extracted file
     print("Copying extracted files")
-    romfs_folder = os.path.join(input_folder, mod_name, "romfs")
+    romfs_folder = os.path.join(input_folder, mod_name)
     extracted_folder = os.path.join(extract_folder)
     src_folder_path = os.path.join(extracted_folder)
-    dst_folder_path = os.path.join(romfs_folder, "LayoutData")
+    dst_folder_path = os.path.join(romfs_folder)
 
     # Remove the existing destination folder if it exists
     if os.path.exists(dst_folder_path):
