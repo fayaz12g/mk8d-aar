@@ -346,7 +346,7 @@ def select_mario_folder():
     romfs_folder = os.path.join(input_folder, mod_name)
 
     # Decomperss SZS and Lyarc Files
-    start_decompress(romfs_folder)
+    # start_decompress(romfs_folder)
 
     # Perform Pane Strecthing
     patch_blarc(str(ratio_value), HUD_pos, text_folder)
@@ -367,13 +367,20 @@ def select_mario_folder():
             shutil.rmtree(root)
     
     # Compress all remaining folders to Sarc and delete them
-    for root, dirs, files in os.walk(input_folder):
-        if any(file.lower().endswith(".szs") for file in files):
-            level = 1
-            root_folder_name = os.path.basename(root)
-            sarc_output_path = os.path.join(os.path.dirname(root), f"{root_folder_name}.sarc")
-            pack_folder_to_blarc(root, sarc_output_path, level)
-            shutil.rmtree(root)
+    cmn_folder = os.path.join(input_folder, mod_name, 'romfs', 'UI', 'cmn')
+    
+    # Print the names of all folders in cmn_folder (for debugging)
+    cmn_folder = os.path.join(input_folder, mod_name, 'romfs', 'UI', 'cmn')
+    
+    for dir_name in os.listdir(cmn_folder):
+        if dir_name.lower() not in ["boot", "trial"]:
+            dir_path = os.path.join(cmn_folder, dir_name)
+            if os.path.isdir(dir_path):
+                print(f"Compressing folder: {dir_name}")
+                level = 1
+                sarc_output_path = os.path.join(cmn_folder, f"{dir_name}.sarc")
+                pack_folder_to_blarc(dir_path, sarc_output_path, level)
+                shutil.rmtree(dir_path)
 
     print("We are done!")
 
