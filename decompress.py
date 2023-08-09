@@ -59,10 +59,47 @@ def decompress_sarc(file):
             with open(extracted_file_path, "wb") as out:
                 out.write(fileData)
 
+
+        os.remove(file)  # Remove the original .sarc file
+
         # Traverse extracted content for .szs files and decompress
         for root, dirs, files in os.walk(output_folder):
             for file in files:
                 if file.lower().endswith(".szs"):
                     szs_file_path = os.path.join(root, file)
-                    decompress_sarc(szs_file_path)
+                    decompress_szs(szs_file_path)
 
+
+def decompress_szs(file):
+    with open(file, "rb") as inf:
+        inb = inf.read()
+
+    while libyaz0.IsYazCompressed(inb):
+        inb = libyaz0.decompress(inb)
+
+    name = os.path.splitext(os.path.basename(file))[0]  # Original .sarc file's name
+    output_folder = os.path.join(os.path.dirname(file), name)
+
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    arc = SarcLib.SARC_Archive()
+    arc.load(inb)
+
+    for checkObj in arc.contents:
+        if isinstance(checkObj, SarcLib.File):
+            # Extract the filename and the directories
+            dirs, filename = os.path.split(checkObj.name)
+            
+            # Build the destination path
+            dest_path = os.path.join(output_folder, dirs, filename)
+            
+            # Create the necessary directories
+            os.makedirs(os.path.join(output_folder, dirs), exist_ok=True)
+            
+            # Write the file content to the destination
+            with open(dest_path, "wb") as out:
+                out.write(checkObj.data)
+
+
+    os.remove(file)  # Remove the original .szs file

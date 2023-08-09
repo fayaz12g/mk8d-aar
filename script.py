@@ -87,10 +87,6 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
             if name not in do_not_scale_rootpane:
                 patch_blyt(name, 'RootPane', 'scale_x', s1)
 
-        patch_blyt('TalkMessage', 'PicBase', 'scale_x', 1/s1)
-        patch_blyt('PlayGuide', 'PicBase', 'scale_x', 1/s1)
-        patch_blyt('PlayGuideMovie', 'PicMovie', 'scale_x', 1/s1)
-        patch_blyt('TalkMessage', 'PicBase', 'scale_x', 1/s1)
         # patch_blyt('ContinueLoading', 'ParBG', 'shift_x', 1/s1) 
         # patch_blyt('BootLoading', 'ParBG', 'shift_x', 1/s1) 
         # patch_blyt('ContinueLoading', 'PicFooter', 'shift_x', 1/s1) 
@@ -100,13 +96,8 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
-            patch_blyt('MapMini', 'RootPane', 'shift_x', 660*s2) 
-            patch_blyt('CounterLife', 'RootPane', 'shift_x', 660*s2) 
-            patch_blyt('CounterCoin', 'RootPane', 'shift_x', -660*s2) 
-            patch_blyt('SaveMessage', 'All', 'shift_x', -660*s2) 
-            patch_blyt('CounterCollectCoin', 'RootPane', 'shift_x', -660*s2) 
-            patch_blyt('CounterLifeUp', 'RootPane', 'shift_x', 660*s2) 
-            patch_blyt('CounterLifeKids', 'RootPane', 'shift_x', 660*s2) 
+            # patch_blyt('MapMini', 'RootPane', 'shift_x', 660*s2) 
+            # patch_blyt('CounterLife', 'RootPane', 'shift_x', 660*s2) 
             
     else:
         s1 = aspect_ratio / (16/9)
