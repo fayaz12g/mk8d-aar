@@ -332,14 +332,18 @@ def select_mario_folder():
     # Clean up the working directory
     if os.path.exists(text_folder):
         shutil.rmtree(text_folder)
+    if not os.path.exists(text_folder):
+        os.makedirs(text_folder)
 
-    # Download the SMO Layout Files
+    if not os.path.exists(patch_folder):
+        os.makedirs(patch_folder)
+    # Download the MK8D Files
     download_extract_copy(input_folder, mod_name)
 
     # Create the PCHTXT Files
     visual_fixes = create_visuals(do_screenshot.get(), do_disable_fxaa.get(), do_disable_dynamicres.get())
     create_patch_files(patch_folder, str(ratio_value), str(scaling_factor), visual_fixes)
-    romfs_folder = os.path.join(input_folder, mod_name, "romfs", "LayoutData")
+    romfs_folder = os.path.join(input_folder, mod_name)
 
     # Decomperss SZS and Lyarc Files
     start_decompress(romfs_folder)
@@ -347,23 +351,31 @@ def select_mario_folder():
     # Perform Pane Strecthing
     patch_blarc(str(ratio_value), HUD_pos, text_folder)
 
-    # Compress layout folders and delete them
+    # Compress subfolders and delete them
     for root, dirs, files in os.walk(input_folder):
-        if "layout" in dirs:
+        if "blyt" in dirs:
             level = -1
-            layout_folder_path = os.path.join(root, "layout")
-            layout_lyarc_path = os.path.join(root, "layout.lyarc")
-            pack_folder_to_blarc(layout_folder_path, layout_lyarc_path, level)
-            shutil.rmtree(layout_folder_path)
+            blyt_index = dirs.index("blyt")
+            parent_folder_name = os.path.basename(root)
+            
+            # Construct paths
+            blyt_folder_path = os.path.join(root, "blyt")
+            output_szs_path = os.path.join(os.path.dirname(root), f"{parent_folder_name}.szs")
+            
+            # Compress and delete
+            pack_folder_to_blarc(root, output_szs_path, level)
+            shutil.rmtree(root)
     
-    # Compress all remaining folders to SZS and delete them
+    # Compress all remaining folders to Sarc and delete them
     for dir_name in os.listdir(romfs_folder):
-        level = 1
         dir_path = os.path.join(romfs_folder, dir_name)
-        if os.path.isdir(os.path.join(romfs_folder, dir_name)):
-            szs_output_path = os.path.join(romfs_folder, f"{dir_name}.szs")
-            pack_folder_to_blarc(os.path.join(romfs_folder, dir_name), szs_output_path, level)
-            shutil.rmtree(dir_path)
+        if os.path.isdir(dir_path):
+            level = 1
+            szs_files = [file for file in os.listdir(dir_path) if file.endswith(".szs")]
+            if szs_files:
+                sarc_output_path = os.path.join(romfs_folder, f"{dir_name}.sarc")
+                pack_folder_to_blarc(dir_path, sarc_output_path, level)
+                shutil.rmtree(dir_path)
 
     print("We are done!")
 
