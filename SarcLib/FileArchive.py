@@ -569,6 +569,7 @@ class SARC_Archive(FileArchive):
                 return [int(filetuple[1].name[5:].split('.')[0].split()[0], 16)]
 
         # Sort the files by hash
+        flatList = [list(item) if isinstance(item, tuple) else item for item in flatList]
         flatList.sort(
             key=sortByHash,
         )
