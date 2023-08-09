@@ -353,13 +353,13 @@ def select_mario_folder():
 
     # Compress subfolders and delete them
     for root, dirs, files in os.walk(input_folder):
-        if "blyt" in dirs:
+        if "timg" in dirs:
             level = -1
-            blyt_index = dirs.index("blyt")
+            blyt_index = dirs.index("timg")
             parent_folder_name = os.path.basename(root)
             
             # Construct paths
-            blyt_folder_path = os.path.join(root, "blyt")
+            blyt_folder_path = os.path.join(root, "timg")
             output_szs_path = os.path.join(os.path.dirname(root), f"{parent_folder_name}.szs")
             
             # Compress and delete
@@ -369,10 +369,11 @@ def select_mario_folder():
     # Compress all remaining folders to Sarc and delete them
     for root, dirs, files in os.walk(input_folder):
         if any(file.lower().endswith(".szs") for file in files):
-            level = 1
+            level = -1
             root_folder_name = os.path.basename(root)
             sarc_output_path = os.path.join(os.path.dirname(root), f"{root_folder_name}.sarc")
             pack_folder_to_blarc(root, sarc_output_path, level)
+            shutil.rmtree(root)
 
     print("We are done!")
 

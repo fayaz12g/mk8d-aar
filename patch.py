@@ -26,7 +26,7 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
             replacement_value = "009CF340"
             visual_fix = visual_fixesa
 
-        elif version_variable == "1.3.0":
+        elif version_variable == "2.4.0":
             nsobidid = "B424BE150A8E7D78701CBE7A439D9EBF"
             replacement_value = "0074D2EC"
             visual_fix = visual_fixesb
