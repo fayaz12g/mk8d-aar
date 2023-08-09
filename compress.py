@@ -6,18 +6,13 @@ import SarcLib
 
 
 def pack_folder_to_blarc(folder_path, output_file, level):
-    """
-    Pack the files and folders in the folder_path to a .blarc output_file.
-    """
     root = os.path.abspath(folder_path)
     endianness = '>'
 
     pack(root, endianness, level, output_file)
 
 def pack(root, endianness, level, outname):
-    """
-    Pack the files and folders in the root folder.
-    """
+
     if "\\" in root:
         root = "/".join(root.split("\\"))
 

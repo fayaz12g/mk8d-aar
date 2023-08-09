@@ -367,15 +367,12 @@ def select_mario_folder():
             shutil.rmtree(root)
     
     # Compress all remaining folders to Sarc and delete them
-    for dir_name in os.listdir(romfs_folder):
-        dir_path = os.path.join(romfs_folder, dir_name)
-        if os.path.isdir(dir_path):
+    for root, dirs, files in os.walk(input_folder):
+        if any(file.lower().endswith(".szs") for file in files):
             level = 1
-            szs_files = [file for file in os.listdir(dir_path) if file.endswith(".szs")]
-            if szs_files:
-                sarc_output_path = os.path.join(romfs_folder, f"{dir_name}.sarc")
-                pack_folder_to_blarc(dir_path, sarc_output_path, level)
-                shutil.rmtree(dir_path)
+            root_folder_name = os.path.basename(root)
+            sarc_output_path = os.path.join(os.path.dirname(root), f"{root_folder_name}.sarc")
+            pack_folder_to_blarc(root, sarc_output_path, level)
 
     print("We are done!")
 
