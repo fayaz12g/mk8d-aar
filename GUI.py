@@ -373,7 +373,7 @@ def select_mario_folder():
     cmn_folder = os.path.join(input_folder, mod_name, 'romfs', 'UI', 'cmn')
     
     for dir_name in os.listdir(cmn_folder):
-        if dir_name.lower() not in ["boot", "trial", "am"]:
+        if dir_name.lower() not in ["boot", "trial"]:
             dir_path = os.path.join(cmn_folder, dir_name)
             if os.path.isdir(dir_path):
                 print(f"Compressing folder: {dir_name}")
