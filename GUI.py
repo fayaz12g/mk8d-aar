@@ -384,7 +384,7 @@ def select_mario_folder():
             dir_path = os.path.join(cmn_folder, dir_name)
             if os.path.isdir(dir_path):
                 print(f"Compressing folder: {dir_name}")
-                level = 1
+                level = 2
                 sarc_output_path = os.path.join(cmn_folder, f"{dir_name}.sarc")
                 pack_folder_to_blarc(dir_path, sarc_output_path, level)
                 shutil.rmtree(dir_path)
