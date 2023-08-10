@@ -38,6 +38,7 @@ import shutil
 import requests
 import psutil
 from visuals import create_visuals
+from keystone import *
 
 #######################
 #### Create Window ####
@@ -62,7 +63,13 @@ ar_numerator = StringVar(value="16")
 ar_denominator = StringVar(value="9")
 do_disable_fxaa = BooleanVar()
 do_disable_dynamicres = BooleanVar()
-do_screenshot = StringVar()
+do_steering = BooleanVar()
+do_disable_fxaa = BooleanVar()
+do_disable_dynamicres = BooleanVar()
+do_disabledof = BooleanVar()
+do_lodimprove = BooleanVar()
+do_fpssplit = BooleanVar()
+
 
 
 # Legacy Visuals
@@ -341,7 +348,7 @@ def select_mario_folder():
     download_extract_copy(input_folder, mod_name)
 
     # Create the PCHTXT Files
-    visual_fixes = create_visuals(do_screenshot.get(), do_disable_fxaa.get(), do_disable_dynamicres.get())
+    visual_fixes = create_visuals(str(do_steering.get()), str(do_disable_fxaa.get()), str(do_disable_dynamicres.get()), str(do_disabledof.get()), str(do_lodimprove.get()), str(do_fpssplit.get()))
     create_patch_files(patch_folder, str(ratio_value), str(scaling_factor), visual_fixes)
     romfs_folder = os.path.join(input_folder, mod_name)
 
@@ -377,7 +384,7 @@ def select_mario_folder():
             dir_path = os.path.join(cmn_folder, dir_name)
             if os.path.isdir(dir_path):
                 print(f"Compressing folder: {dir_name}")
-                level = -1
+                level = 1
                 sarc_output_path = os.path.join(cmn_folder, f"{dir_name}.sarc")
                 pack_folder_to_blarc(dir_path, sarc_output_path, level)
                 shutil.rmtree(dir_path)
@@ -405,7 +412,10 @@ def pack_widgets():
     denominator_entry.pack(side="left")
     
     fxaa_checkbox.pack(padx=5, pady=5)
-    screenshot_checkbox.pack(padx=5, pady=5)
+    steering_checkbox.pack(padx=5, pady=5)
+    fps60_checkbox.pack(padx=5, pady=5)
+    lodimprove.pack(padx=5, pady=5)
+    dof_double.pack(padx=5, pady=5)
     dynamicres_checkbox.pack(padx=10, pady=10)
     
     image_label.pack()
@@ -467,7 +477,10 @@ def forget_packing():
     denominator_entry.pack_forget()
     
     fxaa_checkbox.pack_forget()
-    screenshot_checkbox.pack_forget()
+    steering_checkbox.pack_forget()
+    fps60_checkbox.pack_forget()
+    lodimprove.pack_forget()
+    dof_double.pack_forget()
     dynamicres_checkbox.pack_forget()
 
     image_label.pack_forget()
@@ -544,8 +557,12 @@ denominator_entry.bind("<FocusIn>", lambda event: handle_focus_in(denominator_en
 denominator_entry.bind("<FocusOut>", lambda event: handle_focus_out(denominator_entry, "9"))
 
 fxaa_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable FXAA", variable=do_disable_fxaa)
-screenshot_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Screenshot Mode Graphics (LOD Improve)", variable=do_screenshot)
+steering_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable Steer Asisst Mode", variable=do_steering)
 dynamicres_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable Dynamic Resolution", variable=do_disable_dynamicres)
+fps60_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Use 60FPS in Splitscreen Multiplayer", variable=do_fpssplit)
+lodimprove = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="LOD Improvement", variable=do_lodimprove)
+dof_double = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="DOF Increase", variable=do_disabledof)
+
 
 ##########################
 ####### Controller #######

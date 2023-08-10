@@ -1,16 +1,14 @@
 import struct
 import math
 import os
+import keystone
+from keystone import *
 
-def convert_asm_to_arm64_hex(x):
-    p = math.floor(math.log(x, 2))
-    a = round(16*(p-2) + x / 2**(p-4))
-    if a<0: a += 128
-    a = 2*a + 1
-    h = hex(a).lstrip('0x').rjust(2,'0').upper()
-    hex_value = '00' + h[1] + '02' + h[0] + '1E' 
-    print(hex_value)
-    return hex_value
+def convert_asm_to_arm64_hex(asm_code):
+    import binascii
+    ks = Ks(KS_ARCH_ARM, KS_MODE_ARM)
+    encoding, _ = ks.asm(asm_code)
+    return binascii.hexlify(bytearray(encoding)).decode('utf-8').upper()
 
 def calculate_rounded_ratio(ratio_value):
     if ratio_value <= 2:
@@ -22,7 +20,7 @@ def calculate_rounded_ratio(ratio_value):
     return rounded_ratio
 
 def generate_asm_code(rounded_ratio):
-    asm_code = f"fmov s0, #{rounded_ratio}"
+    asm_code = f"vmov.f32 s0, #{rounded_ratio}e+00"
     return asm_code
 
 def float2hex(f):
