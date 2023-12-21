@@ -1,92 +1,80 @@
+def create_visuals(do_split60, do_disabledynamic, do_nosteer, do_dofscaler, do_fxaaoff, do_fxaaon, do_fxaaonscaler, do_lodenhance):
 
-def create_visuals(do_steering, do_disable_fxaa, do_disable_dynamicres, do_disabledof, do_lodimprove, do_fpssplit):
+    split60 = "disabled"
+    dynamic = "disabled"
+    nosteer = "disabled"
+    dofscaler = "disabled"
+    fxaaoff = "disabled"
+    fxaaon = "disabled"
+    fxaaonscaler = "disabled"
+    lodenhance = "disabled"
 
-    steering = "disabled"
-    disablefxaa = "disabled"
-    disabledynamicres = "disabled"
-    disabledof = "disabled"
-    lodimprove = "disabled"
-    fpssplit = "disabled"
-    
     visual_fixes = []
 
-    do_steering = eval(do_steering)
-    do_disable_fxaa = eval(do_disable_fxaa)
-    do_disable_dynamicres = eval(do_disable_dynamicres)
-    do_disabledof = eval(do_disabledof)
-    do_lodimprove = eval(do_lodimprove)
-    do_fpssplit = eval(do_fpssplit)
+    do_split60 = eval(do_split60)
+    do_disabledynamic = eval(do_disabledynamic)
     
-    if do_steering:
-        steering = "enabled"
-    if do_disable_fxaa:
-        disablefxaa = "enabled"
-    if do_disable_dynamicres:
-        disabledynamicres = "enabled"
-    if do_disabledof:
-        disabledof = "enabled"
-    if do_lodimprove:
-        lodimprove = "enabled"
-    if do_fpssplit:
-        fpssplit = "enabled"
+    if do_split60:
+        split60 = "enabled"
+    if do_disabledynamic:
+        dynamic = "enabled"
+    if do_nosteer:
+        nosteer = "enabled"
+    if do_dofscaler:
+        dofscaler = "enabled"
+    if do_fxaaoff:
+        fxaaoff = "enabled"
+    if do_fxaaon:
+        fxaaon = "enabled"
+    if do_fxaaonscaler:
+        fxaaonscaler = "enabled"
+    if do_lodenhance:
+        lodenhance = "enabled"
         
-    visuals1_0_0 = f'''// Screenshot Mode Graphics
-@{steering}
-00A56568 68008052
-00A55CD0 1F2003D5
-00A55CD4 1F2003D5
+    visuals3_0_1 = f'''// 60 FPS in Splitscreen
+@{split60}
+00BC0B3C 970000EA
 @stop
 
-// Disable FXAA
-@{disablefxaa}
-00B92318 08000014
+// Dynamic Res Disable
+@{dynamic}
+0079DD84 9D0200EA
 @stop
 
-// Disable Steering Assist
-@enabled
-0012ad4c 820000EA
+// Disable Steer Assist
+@{nosteer}
+0018B764 0000A0E3
 @stop
 
-// Disable Dynamic Resolution
-@{disabledynamicres}
-00A583B4 1F2003D5
-00A583C8 1F2003D5
-@stop
-'''
-
-    visuals2_4_0= f'''// Lod Improvement
-@{lodimprove}
-00851978 0020A0E3
-006b304c 001AB0EE
+// DOF Scaler Fix
+@{dofscaler}
+00B81630 003AB7EE
 @stop
 
-// Disable Steering Assist
-@{steering}
-0012ad4c 820000EA
+// Force FXAA Off
+@{fxaaoff}
+006B54F4 00F020E3
 @stop
 
-// Double DOF Resolution
-@{disabledof}
-00b42230 003AB7EE
+// Force FXAA On
+@{fxaaon}
+006B590C 00F020E3
 @stop
 
-// Disable FXAA
-@{disablefxaa}
-00678024 00F020E3
+// Force FXAA On - Scaler Fix
+@{fxaaonscaler}
+006B56F8 3F94A0E3
+006B590C 00F020E3
 @stop
 
-// Disable Dynamic Resolution
-@{disabledynamicres}
-007608b4 9D0200EA
-@stop
-
-// 60 FPS In Splitscreen
-@{fpssplit}
-00b8173c 970000EA
+// LOD Enhancement
+@{lodenhance}
+0088ED3C 0020A0E3
+006F051C 001AB0EE
+00AF41C4 000AB9EE
+00B1EB34 000ABBEE
 @stop
 '''
-
-    visual_fixes.append(visuals1_0_0)
-    visual_fixes.append(visuals2_4_0)
+    visual_fixes.append(visuals3_0_1)
     
     return visual_fixes

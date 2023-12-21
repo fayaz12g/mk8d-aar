@@ -48,7 +48,7 @@ from keystone import *
 tool_version = "1.0.0"
 
 root = customtkinter.CTk()
-root.title(f"Fayaz's Settings {tool_version} for Mario Kart 8 Deluxe")
+root.title(f"Fayaz's Settings {tool_version} for Mario Kart 8 Deluxe 3.0.1")
 root.geometry("500x720")
 
 customtkinter.set_appearance_mode("system")
@@ -62,14 +62,15 @@ windowtitle = customtkinter.CTkLabel(master=root, font=(CTkFont, 20), text="Faya
 # Visuals
 ar_numerator = StringVar(value="16")
 ar_denominator = StringVar(value="9")
-do_disable_fxaa = BooleanVar()
-do_disable_dynamicres = BooleanVar()
-do_steering = BooleanVar()
-do_disable_fxaa = BooleanVar()
-do_disable_dynamicres = BooleanVar()
-do_disabledof = BooleanVar()
-do_lodimprove = BooleanVar()
-do_fpssplit = BooleanVar()
+
+do_split60 = BooleanVar()
+do_disabledynamic = BooleanVar()
+do_nosteer = BooleanVar()
+do_dofscaler = BooleanVar()
+do_fxaaoff = BooleanVar()
+do_fxaaon = BooleanVar()
+do_fxaaonscaler = BooleanVar()
+do_lodenhance = BooleanVar()
 
 
 
@@ -309,12 +310,13 @@ def select_mario_folder():
     mod_name = str(mod_name_var.get())
     ratio_value = (int(numerator_entry.get()) / int(denominator_entry.get()))
     scaling_factor = (16/9) / (int(numerator_entry.get()) / int(denominator_entry.get()))
+    inverse_factor = (int(numerator_entry.get()) / int(denominator_entry.get())) / (16/9)
     username = getpass.getuser()
     if output_yuzu.get() is True:
-        input_folder = f"C:/Users/{username}/AppData/Roaming/yuzu/load/0100152000022000"
+        input_folder = f"C:\\Users\\{username}\\AppData\\Roaming\\yuzu\\load\\0100152000022000"
         process_name = "yuzu.exe"
     if output_ryujinx.get() is True:
-        input_folder = f"C:/Users/{username}/AppData/Roaming/Ryujinx/mods/contents/0100152000022000"
+        input_folder = f"C:\\Users\\{username}\\AppData\\Roaming\\Ryujinx\\mods\\contents\\0100152000022000"
         process_name = "ryujinx.exe"
     else:
         process_name = "yuzu.exe"
@@ -349,48 +351,53 @@ def select_mario_folder():
     download_extract_copy(input_folder, mod_name)
 
     # Create the PCHTXT Files
-    visual_fixes = create_visuals(str(do_steering.get()), str(do_disable_fxaa.get()), str(do_disable_dynamicres.get()), str(do_disabledof.get()), str(do_lodimprove.get()), str(do_fpssplit.get()))
-    create_patch_files(patch_folder, str(ratio_value), str(scaling_factor), visual_fixes)
+    visual_fixes = create_visuals(str(do_split60.get()), str(do_disabledynamic.get()), str(do_nosteer.get()), str(do_dofscaler.get()), str(do_fxaaoff.get()), str(do_fxaaon.get()), str(do_fxaaonscaler.get()), str(do_lodenhance.get()))
+    create_patch_files(patch_folder, str(inverse_factor), str(scaling_factor), visual_fixes)
     romfs_folder = os.path.join(input_folder, mod_name)
 
-    # Decomperss SZS and Lyarc Files
-    start_decompress(romfs_folder)
+    cmn_folder = os.path.join(input_folder, mod_name, 'romfs', 'UI', 'cmn')
+    sarc_tool_path = r"C:\Users\fayaz\OneDrive\Documents\GitHub\mk8d-aar\sarc_tool_x64_v0.5\sarc_tool.exe"
+
+    # Decomperss sarc Files
+    for dir_name in os.listdir(cmn_folder):
+        if dir_name.lower() not in ["boot", "trial"]:
+            dir_path = os.path.join(cmn_folder, dir_name)
+            subprocess.run([sarc_tool_path, dir_path], check=True)
+            print(f"extracting {dir_name}")
+            os.remove(dir_path)
+
+    # Decompres szs files
+    for folder, _, files in os.walk(cmn_folder):
+        for file_name in files:
+            if file_name.lower().endswith(".szs"):
+                file_path = os.path.join(folder, file_name)
+            subprocess.run([sarc_tool_path, file_path], check=True)
+            os.remove(file_path)
 
     # Perform Pane Strecthing
     patch_blarc(str(ratio_value), HUD_pos, text_folder)
 
-    # Compress subfolders and delete them
-    for root, dirs, files in os.walk(input_folder):
-        if "timg" in dirs:
-            level = 1
-            blyt_index = dirs.index("timg")
-            parent_folder_name = os.path.basename(root)
-            
-            # Construct paths
-            blyt_folder_path = os.path.join(root, "timg")
-            output_szs_path = os.path.join(os.path.dirname(root), f"{parent_folder_name}.szs")
-            
-            # Compress and delete
-            pack_folder_to_blarc(root, output_szs_path, level)
-            shutil.rmtree(root)
-    
-    # Compress all remaining folders to Sarc and delete them
-    cmn_folder = os.path.join(input_folder, mod_name, 'romfs', 'UI', 'cmn')
-    
-    # Print the names of all folders in cmn_folder (for debugging)
-    cmn_folder = os.path.join(input_folder, mod_name, 'romfs', 'UI', 'cmn')
-    
+    # Compress every folder that has a .bntx inside with the arguments 
     for dir_name in os.listdir(cmn_folder):
-        if dir_name.lower() not in ["boot", "trial"]:
+        dir_path = os.path.join(cmn_folder, dir_name)
+        for dir_name2 in os.listdir(dir_path):
+            dir_path2 = os.path.join(dir_path, dir_name2)
+            print(f"Recompressing {dir_name2}.szs")
+            subprocess.run([sarc_tool_path, "-compress", "1", dir_path2], check=True)
+            shutil.rmtree(dir_path2)
+
+
+    # Recompress sarc Files
+    for dir_name in os.listdir(cmn_folder):
+        if dir_name.lower() not in ["boot", "trial", "menu"]:
             dir_path = os.path.join(cmn_folder, dir_name)
-            if os.path.isdir(dir_path):
-                print(f"Compressing folder: {dir_name}")
-                level = 2
-                sarc_output_path = os.path.join(cmn_folder, f"{dir_name}.sarc")
-                pack_folder_to_blarc(dir_path, sarc_output_path, level)
-                shutil.rmtree(dir_path)
+            subprocess.run([sarc_tool_path, dir_path], check=True)
+            shutil.rmtree(dir_path)
 
     print("We are done!")
+    if open_when_done.get() == True:
+        print ("Complete! Opening output folder.")
+        os.startfile(cmn_folder)
 
 def create_patch():
     sys.stdout = PrintRedirector(scrolled_text)
@@ -411,13 +418,17 @@ def pack_widgets():
     numerator_entry.pack(side="left")
     aspect_ratio_divider.pack(side="left")
     denominator_entry.pack(side="left")
+
     
-    fxaa_checkbox.pack(padx=5, pady=5)
-    steering_checkbox.pack(padx=5, pady=5)
-    fps60_checkbox.pack(padx=5, pady=5)
-    lodimprove.pack(padx=5, pady=5)
-    dof_double.pack(padx=5, pady=5)
-    dynamicres_checkbox.pack(padx=10, pady=10)
+    split60.pack(padx=5, pady=5)
+    disabledynamic.pack(padx=5, pady=5)
+    nosteer.pack(padx=5, pady=5)
+    dofscaler.pack(padx=5, pady=5)
+    fxaaoff.pack(padx=5, pady=5)
+    fxaaon.pack(padx=5, pady=5)
+    fxaaonscaler.pack(padx=5, pady=5)
+    lodenhance.pack(padx=5, pady=5) 
+
     
     image_label.pack()
 
@@ -477,12 +488,14 @@ def forget_packing():
     aspect_ratio_divider.pack_forget()
     denominator_entry.pack_forget()
     
-    fxaa_checkbox.pack_forget()
-    steering_checkbox.pack_forget()
-    fps60_checkbox.pack_forget()
-    lodimprove.pack_forget()
-    dof_double.pack_forget()
-    dynamicres_checkbox.pack_forget()
+    split60.pack_forget() 
+    disabledynamic.pack_forget()
+    nosteer.pack_forget()
+    dofscaler.pack_forget() 
+    fxaaoff.pack_forget() 
+    fxaaon.pack_forget()
+    fxaaonscaler.pack_forget() 
+    lodenhance.pack_forget() 
 
     image_label.pack_forget()
     image_layout_label.pack_forget()
@@ -557,13 +570,14 @@ denominator_entry.configure(text_color='gray')
 denominator_entry.bind("<FocusIn>", lambda event: handle_focus_in(denominator_entry, "9"))
 denominator_entry.bind("<FocusOut>", lambda event: handle_focus_out(denominator_entry, "9"))
 
-fxaa_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable FXAA", variable=do_disable_fxaa)
-steering_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable Steer Asisst Mode", variable=do_steering)
-dynamicres_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable Dynamic Resolution", variable=do_disable_dynamicres)
-fps60_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Use 60FPS in Splitscreen Multiplayer", variable=do_fpssplit)
-lodimprove = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="LOD Improvement", variable=do_lodimprove)
-dof_double = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="DOF Increase", variable=do_disabledof)
-
+split60 = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="60 FPS in Splitscreen", variable=do_split60)
+disabledynamic = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable Dynamic Resolution", variable=do_disabledynamic)
+nosteer = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable Steer Assist", variable=do_nosteer)
+dofscaler = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="DOF Scaler", variable=do_dofscaler)
+fxaaoff = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="FXAA Off", variable=do_fxaaoff)
+fxaaon = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="FXAA On", variable=do_fxaaon)
+fxaaonscaler = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="FXAA On - Scaler Fix", variable=do_fxaaonscaler)
+lodenhance = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="LOD Enhancement", variable=do_lodenhance)
 
 ##########################
 ####### Controller #######

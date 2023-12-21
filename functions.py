@@ -20,7 +20,7 @@ def calculate_rounded_ratio(ratio_value):
     return rounded_ratio
 
 def generate_asm_code(rounded_ratio):
-    asm_code = f"vmov.f32 s0, #{rounded_ratio}e+00"
+    asm_code = f"vmov.f32 s2, #{rounded_ratio}e+00"
     return asm_code
 
 def float2hex(f):

@@ -4,17 +4,20 @@ import libyaz0
 import sys
 from functions import patch_blyt
 import subprocess
+import shutil
 
 def start_decompress(input_folder):
     for root, _, files in os.walk(input_folder):
         for file in files:
             if file.lower().endswith(".sarc"):
                 file_path = os.path.join(root, file)
-                decompress_sarc(file_path)
+                print(file_path)
+                # decompress_sarc(file_path)
 
 def decompress_sarc(file):
     sarc_tool_path = r"C:\Users\fayaz\OneDrive\Documents\GitHub\mk8d-aar\sarc_tool_x64_v0.5\sarc_tool.exe"
     subprocess.run([sarc_tool_path, file], check=True)
+    shutil.rmtree(file)
 
 def decompress_szs(file):
     with open(file, "rb") as inf:
