@@ -11,7 +11,7 @@ def download_extract_copy(input_folder, mod_name):
     zip_url = "https://github.com/fayaz12g/mk8d-aar/raw/main/romfs.zip"
 
     username = getpass.getuser()
-    directory_path = f"C:/Users/{username}/AppData/Roaming/totk-aar/controllers"
+    directory_path = f"C:/Users/{username}/AppData/Roaming/AnyAspectRatio/mk8d-aar-main"
     # Check if the directory exists
     if not os.path.exists(directory_path):
         # Create the directory if it doesn't exist
@@ -19,7 +19,7 @@ def download_extract_copy(input_folder, mod_name):
         print(f"Directory {directory_path} created successfully.")
     else:
         print(f"Directory {directory_path} already exists.")
-    totk_folder = f"C:/Users/{username}/AppData/Roaming/totk-aar/controllers"
+    totk_folder = f"C:/Users/{username}/AppData/Roaming/AnyAspectRatio/mk8d-aar-main"
     zip_file_source = os.path.join(totk_folder, "romfs.zip")
 
     if not os.path.isfile(zip_file_source):
