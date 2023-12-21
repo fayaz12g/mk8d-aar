@@ -11,6 +11,7 @@ import customtkinter
 import tkinter
 from tkinter import filedialog
 from tkinter import scrolledtext
+import subprocess
 from tkinter.filedialog import askdirectory
 from customtkinter import *
 from threading import Thread
@@ -353,7 +354,7 @@ def select_mario_folder():
     romfs_folder = os.path.join(input_folder, mod_name)
 
     # Decomperss SZS and Lyarc Files
-    # start_decompress(romfs_folder)
+    start_decompress(romfs_folder)
 
     # Perform Pane Strecthing
     patch_blarc(str(ratio_value), HUD_pos, text_folder)
