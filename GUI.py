@@ -745,31 +745,8 @@ credits_label = ClickableLabel(master=notebook.tab("Credits"), text=
                      'ko-fi.com/fayaz12\n'
                      '\n'
                      'Based on\n'
-                     'HUD Fix script by u/fruithapje21 on Reddit\n'
-                     '\n'
-                     'Controller Mods:\n'
-                     'Alerion921 on Gamebanana\ngamebanana.com/members/1944248\n'
-                     '\nStavaasEVG on Gamebanana\ngamebanana.com/members/1578286\n'
-                     '\n'
-                     'Visual Fixes by\n'
-                     'ChuckFeedAndSeed, patchanon, somerandompeople, SweetMini, \n'
-                     'theboy181, Wollnashorn, and Zeikken on GBAtemp\n'
-                     '\n'
-                     'dFPS Mod by\n'
-                     'reddit.com/user/ChucksFeedAndSeed/'
-                     '\n\n'
-                     'BlackscreenFIX by\n'
-                     'MarethyuX'
-                     '\n\n'
-                     'Some ASM patches by\n'
-                     'theboy181'
-                     '\n\n'
-                     'And thanks for extensive testing and reports by\n'
-                     'InterClaw'
-                     '\n\n\n\n'
-                     'With special help from\n'
-                     'Christopher Fields (cfields7)\n'
-                     'for code beautification and being a great best friend :)'))
+                     'pchtxt mods by theboy81 off GitHub\n'
+                     '\n'))
 
 pack_widgets()
 
