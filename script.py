@@ -63,7 +63,7 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
     blyt_folder = os.path.abspath(os.path.join(unpacked_folder))
     file_names_stripped = []
    
-    do_not_scale_rootpane = ['WipeCircle']
+    do_not_scale_rootpane = ['rc_RaceView_1P_00']
 
     for root, dirs, files in os.walk(blyt_folder):
         for file_name in files:
