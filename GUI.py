@@ -45,7 +45,7 @@ from keystone import *
 #### Create Window ####
 #######################
 
-tool_version = "2.0.0"
+tool_version = "2.0.1"
 
 root = customtkinter.CTk()
 root.title(f"Fayaz's Settings {tool_version} for Mario Kart 8 Deluxe 3.0.1")
@@ -356,7 +356,8 @@ def select_mario_folder():
     romfs_folder = os.path.join(input_folder, mod_name)
 
     cmn_folder = os.path.join(input_folder, mod_name, 'romfs', 'UI', 'cmn')
-    sarc_tool_path = r"C:\Users\fayaz\OneDrive\Documents\GitHub\mk8d-aar\sarc_tool_x64_v0.5\sarc_tool.exe"
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    sarc_tool_path = os.path.join(current_directory, "sarc_tool_x64_v0.5", "sarc_tool.exe")
 
     # Decomperss sarc Files
     for dir_name in os.listdir(cmn_folder):
