@@ -63,7 +63,7 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
     blyt_folder = os.path.abspath(os.path.join(unpacked_folder))
     file_names_stripped = []
    
-    do_not_scale_rootpane = ['rc_RaceView_1P_00']
+    do_not_scale_rootpane = ['rc_RaceView_1P_00', 'hash_0xb061c76e']
 
     for root, dirs, files in os.walk(blyt_folder):
         for file_name in files:
@@ -87,7 +87,24 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
             if name not in do_not_scale_rootpane:
                 patch_blyt(name, 'RootPane', 'scale_x', s1)
 
-        # patch_blyt('ContinueLoading', 'ParBG', 'shift_x', 1/s1) 
+        patch_blyt('rc_RaceView_1P_00', 'N_Pause_00', 'scale_x', s1) 
+        patch_blyt('rc_RaceView_1P_00', 'N_All_00', 'scale_x', s1) 
+        patch_blyt('rc_RaceView_1P_00', 'N_Pause_02', 'scale_x', s1) 
+        patch_blyt('rc_RaceView_1P_00', 'N_ItemBoxPos_00', 'shift_x', -780) 
+        patch_blyt('rc_RaceView_1P_00', 'L_Rank_00', 'shift_x', 750) 
+        patch_blyt('rc_RaceView_1P_00', 'L_LapCoin_00', 'shift_x', -750) 
+        patch_blyt('hash_0xb061c76e', 'N_Pause_00', 'scale_x', s1) 
+        patch_blyt('hash_0xb061c76e', 'N_All_00', 'scale_x', s1) 
+        patch_blyt('hash_0xb061c76e', 'N_Pause_02', 'scale_x', s1) 
+        patch_blyt('hash_0xb061c76e', 'N_ItemBoxPos_00', 'shift_x', -780) 
+        patch_blyt('hash_0xb061c76e', 'L_Rank_00', 'shift_x', 750) 
+        patch_blyt('hash_0xb061c76e', 'L_LapCoin_00', 'shift_x', -750) 
+        patch_blyt('rc_RaceView_2P_Ml', 'N_Pause_00', 'scale_x', s1) 
+        patch_blyt('rc_RaceView_2P_Ml', 'N_All_00', 'scale_x', s1) 
+        patch_blyt('rc_RaceView_2P_Ml', 'N_Pause_02', 'scale_x', s1) 
+        patch_blyt('rc_RaceView_2P_Ml', 'N_ItemBoxPos_00', 'shift_x', -350) 
+        patch_blyt('rc_RaceView_2P_Ml', 'L_Rank_00', 'shift_x', 200) 
+        patch_blyt('rc_RaceView_2P_Ml', 'L_LapCoin_00', 'shift_x', -200) 
         # patch_blyt('BootLoading', 'ParBG', 'shift_x', 1/s1) 
         # patch_blyt('ContinueLoading', 'PicFooter', 'shift_x', 1/s1) 
         # patch_blyt('ContinueLoading', 'PicFooterBar', 'shift_x', 1/s1) 
