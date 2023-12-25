@@ -8,7 +8,7 @@ def download_extract_copy(input_folder, mod_name):
     import getpass
 
     # URL of the ZIP file
-    zip_url = "https://github.com/fayaz12g/mk8d-aar/raw/main/romfs.zip"
+    zip_url = "https://github.com/fayaz12g/aar-files/raw/main/mk8d/romfs.zip"
 
     username = getpass.getuser()
     directory_path = f"C:/Users/{username}/AppData/Roaming/AnyAspectRatio/mk8d-aar-main"
