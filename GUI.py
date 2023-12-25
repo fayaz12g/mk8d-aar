@@ -44,7 +44,7 @@ from compress import pack
 #### Create Window ####
 #######################
 
-tool_version = "2.0.1"
+tool_version = "2.0.2"
 
 root = customtkinter.CTk()
 root.title(f"Fayaz's Settings {tool_version} for Mario Kart 8 Deluxe 3.0.1")
