@@ -1,18 +1,10 @@
 import os
 import sys
 import time
-import libyaz0
 import SarcLib
-
-
-def pack_folder_to_blarc(folder_path, output_file, level):
-    root = os.path.abspath(folder_path)
-    endianness = '>'
-
-    pack(root, endianness, level, output_file)
+import libyaz0
 
 def pack(root, endianness, level, outname):
-
     if "\\" in root:
         root = "/".join(root.split("\\"))
 
@@ -41,8 +33,7 @@ def pack(root, endianness, level, outname):
             else:
                 filename = file
 
-            print(f"Repacking {filename}")
-            
+            print(filename)
 
             fullname = ''.join([root, "/", filename])
 
@@ -77,14 +68,12 @@ def pack(root, endianness, level, outname):
 
         if not outname:
             outname = ''.join([root, ".szs"])
-            print(f"Writing {outname}")
 
     else:
         outData = data
         if not outname:
             outname = ''.join([root, ".sarc"])
-            print(f"Writing {outname}")
 
     with open(outname, "wb+") as output:
-        print(f"Writing {outname}")
         output.write(outData)
+

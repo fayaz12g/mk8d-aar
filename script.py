@@ -6,7 +6,6 @@ import struct
 import math
 import ast
 from compress import pack 
-from compress import pack_folder_to_blarc
 import customtkinter
 import tkinter
 from tkinter import filedialog
@@ -87,34 +86,32 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
             if name not in do_not_scale_rootpane:
                 patch_blyt(name, 'RootPane', 'scale_x', s1)
 
-        patch_blyt('rc_RaceView_1P_00', 'N_Pause_00', 'scale_x', s1) 
-        patch_blyt('rc_RaceView_1P_00', 'N_All_00', 'scale_x', s1) 
-        patch_blyt('rc_RaceView_1P_00', 'N_Pause_02', 'scale_x', s1) 
-        patch_blyt('rc_RaceView_1P_00', 'N_ItemBoxPos_00', 'shift_x', -780) 
-        patch_blyt('rc_RaceView_1P_00', 'L_Rank_00', 'shift_x', 750) 
-        patch_blyt('rc_RaceView_1P_00', 'L_LapCoin_00', 'shift_x', -750) 
-        patch_blyt('hash_0xb061c76e', 'N_Pause_00', 'scale_x', s1) 
-        patch_blyt('hash_0xb061c76e', 'N_All_00', 'scale_x', s1) 
-        patch_blyt('hash_0xb061c76e', 'N_Pause_02', 'scale_x', s1) 
-        patch_blyt('hash_0xb061c76e', 'N_ItemBoxPos_00', 'shift_x', -780) 
-        patch_blyt('hash_0xb061c76e', 'L_Rank_00', 'shift_x', 750) 
-        patch_blyt('hash_0xb061c76e', 'L_LapCoin_00', 'shift_x', -750) 
-        patch_blyt('rc_RaceView_2P_Ml', 'N_Pause_00', 'scale_x', s1) 
-        patch_blyt('rc_RaceView_2P_Ml', 'N_All_00', 'scale_x', s1) 
-        patch_blyt('rc_RaceView_2P_Ml', 'N_Pause_02', 'scale_x', s1) 
-        patch_blyt('rc_RaceView_2P_Ml', 'N_ItemBoxPos_00', 'shift_x', -350) 
-        patch_blyt('rc_RaceView_2P_Ml', 'L_Rank_00', 'shift_x', 200) 
-        patch_blyt('rc_RaceView_2P_Ml', 'L_LapCoin_00', 'shift_x', -200) 
-        # patch_blyt('BootLoading', 'ParBG', 'shift_x', 1/s1) 
-        # patch_blyt('ContinueLoading', 'PicFooter', 'shift_x', 1/s1) 
-        # patch_blyt('ContinueLoading', 'PicFooterBar', 'shift_x', 1/s1) 
-        # patch_blyt('ContinueLoading', 'PicProgressBar', 'shift_x', 1/s1) 
+        # patch_blyt('rc_RaceView_1P_00', 'N_Pause_00', 'scale_x', s1) 
+        # patch_blyt('rc_RaceView_1P_00', 'N_All_00', 'scale_x', s1) 
+        # patch_blyt('rc_RaceView_1P_00', 'N_Pause_02', 'scale_x', s1) 
+        # patch_blyt('rc_RaceView_1P_00', 'N_ItemBoxPos_00', 'shift_x', -780) 
         
         
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
-            # patch_blyt('MapMini', 'RootPane', 'shift_x', 660*s2) 
-            # patch_blyt('CounterLife', 'RootPane', 'shift_x', 660*s2) 
+            # patch_blyt('rc_RaceView_1P_00', 'N_Pause_00', 'scale_x', s1) 
+            # patch_blyt('rc_RaceView_1P_00', 'N_All_00', 'scale_x', s1) 
+            # patch_blyt('rc_RaceView_1P_00', 'N_Pause_02', 'scale_x', s1) 
+            # patch_blyt('rc_RaceView_1P_00', 'N_ItemBoxPos_00', 'shift_x', -780) 
+            # patch_blyt('rc_RaceView_1P_00', 'L_Rank_00', 'shift_x', 750) 
+            # patch_blyt('rc_RaceView_1P_00', 'L_LapCoin_00', 'shift_x', -750) 
+            patch_blyt('hash_0xb061c76e', 'N_Pause_00', 'scale_x', s1) 
+            patch_blyt('hash_0xb061c76e', 'N_All_00', 'scale_x', s1) 
+            # patch_blyt('hash_0xb061c76e', 'N_Pause_02', 'scale_x', s1) 
+            patch_blyt('hash_0xb061c76e', 'N_ItemBoxPos_00', 'shift_x', -780) 
+            patch_blyt('hash_0xb061c76e', 'L_Rank_00', 'shift_x', 750) 
+            patch_blyt('hash_0xb061c76e', 'L_LapCoin_00', 'shift_x', -750) 
+            # patch_blyt('rc_RaceView_2P_Ml', 'N_Pause_00', 'scale_x', s1) 
+            # patch_blyt('rc_RaceView_2P_Ml', 'N_All_00', 'scale_x', s1) 
+            # patch_blyt('rc_RaceView_2P_Ml', 'N_Pause_02', 'scale_x', s1) 
+            # patch_blyt('rc_RaceView_2P_Ml', 'N_ItemBoxPos_00', 'shift_x', -350) 
+            # patch_blyt('rc_RaceView_2P_Ml', 'L_Rank_00', 'shift_x', 200) 
+            # patch_blyt('rc_RaceView_2P_Ml', 'L_LapCoin_00', 'shift_x', -200) 
             
     else:
         s1 = aspect_ratio / (16/9)

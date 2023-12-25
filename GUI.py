@@ -5,8 +5,6 @@ import libyaz0
 import struct
 import math
 import ast
-from compress import pack 
-from compress import pack_folder_to_blarc
 import customtkinter
 import tkinter
 from tkinter import filedialog
@@ -19,7 +17,6 @@ import shutil
 from download import download_extract_copy
 from patch import create_patch_files
 from functions import float2hex
-from decompress import start_decompress
 import getpass
 from script import patch_blarc
 from PIL import Image
@@ -40,6 +37,8 @@ import requests
 import psutil
 from visuals import create_visuals
 from keystone import *
+from decompress import extract
+from compress import pack
 
 #######################
 #### Create Window ####
@@ -356,15 +355,13 @@ def select_mario_folder():
     romfs_folder = os.path.join(input_folder, mod_name)
 
     cmn_folder = os.path.join(input_folder, mod_name, 'romfs', 'UI', 'cmn')
-    current_directory = os.path.dirname(os.path.abspath(__file__))
-    sarc_tool_path = os.path.join(current_directory, "sarc_tool_x64_v0.5", "sarc_tool.exe")
 
     # Decomperss sarc Files
     for dir_name in os.listdir(cmn_folder):
         if dir_name.lower() not in ["boot", "trial"]:
             dir_path = os.path.join(cmn_folder, dir_name)
-            subprocess.run([sarc_tool_path, dir_path], check=True)
-            print(f"extracting {dir_name}")
+            print(f"Extracting {dir_name}")
+            extract(dir_path)
             os.remove(dir_path)
 
     # Decompres szs files
@@ -372,7 +369,7 @@ def select_mario_folder():
         for file_name in files:
             if file_name.lower().endswith(".szs"):
                 file_path = os.path.join(folder, file_name)
-            subprocess.run([sarc_tool_path, file_path], check=True)
+            extract(file_path)
             os.remove(file_path)
 
     # Perform Pane Strecthing
@@ -384,7 +381,7 @@ def select_mario_folder():
         for dir_name2 in os.listdir(dir_path):
             dir_path2 = os.path.join(dir_path, dir_name2)
             print(f"Recompressing {dir_name2}.szs")
-            subprocess.run([sarc_tool_path, "-compress", "1", dir_path2], check=True)
+            pack(dir_path2, ">", -1, "")
             shutil.rmtree(dir_path2)
 
 
@@ -392,7 +389,7 @@ def select_mario_folder():
     for dir_name in os.listdir(cmn_folder):
         if dir_name.lower() not in ["boot", "trial", "menu"]:
             dir_path = os.path.join(cmn_folder, dir_name)
-            subprocess.run([sarc_tool_path, dir_path], check=True)
+            pack(dir_path, ">", -1, "")
             shutil.rmtree(dir_path)
 
     print("We are done!")
