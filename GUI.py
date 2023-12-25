@@ -44,7 +44,7 @@ from compress import pack
 #### Create Window ####
 #######################
 
-tool_version = "2.0.2"
+tool_version = "2.0.3"
 
 root = customtkinter.CTk()
 root.title(f"Fayaz's Settings {tool_version} for Mario Kart 8 Deluxe 3.0.1")
@@ -381,13 +381,13 @@ def select_mario_folder():
         for dir_name2 in os.listdir(dir_path):
             dir_path2 = os.path.join(dir_path, dir_name2)
             print(f"Recompressing {dir_name2}.szs")
-            pack(dir_path2, ">", -1, "")
+            pack(dir_path2, ">", 1, "")
             shutil.rmtree(dir_path2)
 
 
     # Recompress sarc Files
     for dir_name in os.listdir(cmn_folder):
-        if dir_name.lower() not in ["boot", "trial", "menu"]:
+        if dir_name.lower() not in ["boot", "trial"]:
             dir_path = os.path.join(cmn_folder, dir_name)
             pack(dir_path, ">", -1, "")
             shutil.rmtree(dir_path)
