@@ -37,7 +37,8 @@ import requests
 import psutil
 from visuals import create_visuals
 from keystone import *
-from decompress import extract
+from decompress import extract_sarc
+from decompress import extract_szs
 from compress import pack
 
 #######################
@@ -361,7 +362,7 @@ def select_mario_folder():
         if dir_name.lower() not in ["boot", "trial"]:
             dir_path = os.path.join(cmn_folder, dir_name)
             print(f"Extracting {dir_name}")
-            extract(dir_path)
+            extract_sarc(dir_path)
             os.remove(dir_path)
 
     # Decompres szs files
@@ -369,7 +370,7 @@ def select_mario_folder():
         for file_name in files:
             if file_name.lower().endswith(".szs"):
                 file_path = os.path.join(folder, file_name)
-            extract(file_path)
+            extract_szs(file_path)
             os.remove(file_path)
 
     # Perform Pane Strecthing
