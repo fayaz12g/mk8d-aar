@@ -105,7 +105,7 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
             # patch_blyt('hash_0xb061c76e', 'N_Pause_02', 'scale_x', s1) 
             patch_blyt('hash_0xb061c76e', 'N_ItemBoxPos_00', 'shift_x', -780) 
             patch_blyt('hash_0xb061c76e', 'L_Rank_00', 'shift_x', 750) 
-            patch_blyt('hash_0xb061c76e', 'L_LapCoin_00', 'shift_x', -750) 
+            patch_blyt('hash_0xb061c76e', 'L_LapCoin_00', 'shift_x', -650) 
             # patch_blyt('rc_RaceView_2P_Ml', 'N_Pause_00', 'scale_x', s1) 
             # patch_blyt('rc_RaceView_2P_Ml', 'N_All_00', 'scale_x', s1) 
             # patch_blyt('rc_RaceView_2P_Ml', 'N_Pause_02', 'scale_x', s1) 
