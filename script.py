@@ -62,7 +62,10 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
     blyt_folder = os.path.abspath(os.path.join(unpacked_folder))
     file_names_stripped = []
    
-    do_not_scale_rootpane = ['rc_RaceView_1P_00', 'hash_0xb061c76e']
+    do_not_scale_rootpane = ['hash_0xb061c76e', #rc_RaceView_1P_00 in Race
+                            'hash_0x904e307e'] # rc_Viewer_00 in Race
+    rootpane_stretch_y = ['hash_0xcc5d377a' # Background in Menu
+                          ]
 
     for root, dirs, files in os.walk(blyt_folder):
         for file_name in files:
@@ -73,7 +76,7 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
                 modified_name = stripped_name + "_name"
                 file_paths[modified_name] = full_path
                 if file_names_stripped in do_not_scale_rootpane:
-                    print(f"Skipping RootPane scaling of {name}")
+                    print(f"Skipping RootPane horizontal scaling of {name}")
 
     
     if aspect_ratio >= 16/9:
@@ -85,13 +88,17 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         for name in file_names_stripped:
             if name not in do_not_scale_rootpane:
                 patch_blyt(name, 'RootPane', 'scale_x', s1)
-
+        for name in file_names_stripped:
+            if name in rootpane_stretch_y:
+                patch_blyt(name, 'RootPane', 'scale_y', 1/s1)
+        
+        patch_blyt('hash_0x9a7a5a0e', 'N_Capture_0', 'scale_x', 1/s1) # Title Screen Background
         # patch_blyt('rc_RaceView_1P_00', 'N_Pause_00', 'scale_x', s1) 
         # patch_blyt('rc_RaceView_1P_00', 'N_All_00', 'scale_x', s1) 
         # patch_blyt('rc_RaceView_1P_00', 'N_Pause_02', 'scale_x', s1) 
         # patch_blyt('rc_RaceView_1P_00', 'N_ItemBoxPos_00', 'shift_x', -780) 
         
-        
+
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
             # patch_blyt('rc_RaceView_1P_00', 'N_Pause_00', 'scale_x', s1) 
