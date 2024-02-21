@@ -65,7 +65,8 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
     do_not_scale_rootpane = [
                             'hash_0xb061c76e', #rc_RaceView_1P_00 in Race
                             'hash_0xb291a57f' # Loading Screen
-                            'hash_0x904e307e' # rc_Viewer_00 in Race
+                            'hash_0x904e307e', # rc_Viewer_00 in Race
+                            'hash_0x61e313d5' # LoadWin_00
                             ]
     rootpane_stretch_y = ['hash_0xcc5d377a', # Background in Menu
                           'hash_0xb291a57f' # Loading Screen
@@ -102,6 +103,9 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         patch_blyt('hash_0xc1e2251e', 'RootPane', 'scale_x', 1) # Page Fade 
         patch_blyt('hash_0x79edb528', 'RootPane', 'scale_x', 1) # Page Fade Pause
         patch_blyt('hash_0xb061c76e', 'N_Pause_00', 'scale_x', s1) # Player HUD 
+        patch_blyt('hash_0xb291a57f', 'N_Loop_00', 'scale_x', s1) # Loading Screen Elements
+        patch_blyt('hash_0xb291a57f', 'N_Loop_01', 'scale_x', s1) # Loading Screen Elements
+        patch_blyt('hash_0xb291a57f', 'N_null_00', 'scale_x', s1) # Loading Screen Elements
         patch_blyt('hash_0xb061c76e', 'N_All_00', 'scale_x', s1) # Player HUD 
         patch_blyt('hash_0x4141b313', 'RootPane', 'scale_x', s1) #RC Result
         patch_blyt('hash_0x64f64f62', 'RootPane', 'scale_x', s1) #RC Result Team
@@ -109,7 +113,8 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
 
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
-            patch_blyt('hash_0xb061c76e', 'N_ItemBoxPos_00', 'shift_x', -780) 
+            patch_blyt('hash_0xb061c76e', 'L_ItemBox_00', 'shift_x', -250) 
+            # patch_blyt('hash_0xb061c76e', 'N_ItemBoxPos_00', 'shift_x', -780) 
             patch_blyt('hash_0xb061c76e', 'L_Rank_00', 'shift_x', 740) 
             patch_blyt('hash_0xb061c76e', 'L_LapCoin_00', 'shift_x', -650) 
 
