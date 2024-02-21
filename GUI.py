@@ -63,14 +63,14 @@ windowtitle = customtkinter.CTkLabel(master=root, font=(CTkFont, 20), text="Faya
 ar_numerator = StringVar(value="16")
 ar_denominator = StringVar(value="9")
 
-do_split60 = BooleanVar()
-do_disabledynamic = BooleanVar()
-do_nosteer = BooleanVar()
-do_dofscaler = BooleanVar()
-do_fxaaoff = BooleanVar()
-do_fxaaon = BooleanVar()
-do_fxaaonscaler = BooleanVar()
-do_lodenhance = BooleanVar()
+do_split60 = BooleanVar(value=True)
+do_disabledynamic = BooleanVar(value=True)
+do_nosteer = BooleanVar(value=False)
+do_dofscaler = BooleanVar(value=True)
+do_fxaaoff = BooleanVar(value=False)
+do_fxaaon = BooleanVar(value=False)
+do_fxaaonscaler = BooleanVar(value=True)
+do_lodenhance = BooleanVar(value=True)
 
 
 
