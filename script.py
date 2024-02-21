@@ -101,8 +101,8 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         patch_blyt('hash_0x5078a7b0', 'RootPane', 'scale_x', 1) # Fade Pause
         patch_blyt('hash_0xc1e2251e', 'RootPane', 'scale_x', 1) # Page Fade 
         patch_blyt('hash_0x79edb528', 'RootPane', 'scale_x', 1) # Page Fade Pause
-        # patch_blyt('hash_0xb061c76e', 'N_Pause_00', 'scale_x', 1/s1) 
-        # patch_blyt('hash_0xb061c76e', 'N_All_00', 'scale_x', 1/s1) 
+        patch_blyt('hash_0xb061c76e', 'N_Pause_00', 'scale_x', s1) # Player HUD 
+        patch_blyt('hash_0xb061c76e', 'N_All_00', 'scale_x', s1) # Player HUD 
         patch_blyt('hash_0x4141b313', 'RootPane', 'scale_x', s1) #RC Result
         patch_blyt('hash_0x64f64f62', 'RootPane', 'scale_x', s1) #RC Result Team
         patch_blyt('hash_0x468a66a', 'RootPane', 'scale_x', s1) #RC Result TIme Trial
