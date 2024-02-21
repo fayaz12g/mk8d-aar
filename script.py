@@ -62,8 +62,10 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
     blyt_folder = os.path.abspath(os.path.join(unpacked_folder))
     file_names_stripped = []
    
-    do_not_scale_rootpane = ['hash_0xb061c76e', #rc_RaceView_1P_00 in Race
-                            'hash_0x904e307e'] # rc_Viewer_00 in Race
+    do_not_scale_rootpane = [
+                            # 'hash_0xb061c76e', #rc_RaceView_1P_00 in Race
+                            # 'hash_0x904e307e' # rc_Viewer_00 in Race
+                            ]
     rootpane_stretch_y = ['hash_0xcc5d377a' # Background in Menu
                           ]
 
