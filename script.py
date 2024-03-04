@@ -113,7 +113,7 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
 
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
-            patch_blyt('hash_0xb061c76e', 'L_ItemBox_00', 'shift_x', -250) 
+            patch_blyt('hash_0xb061c76e', 'L_ItemBox_00', 'shift_x', -220) 
             # patch_blyt('hash_0xb061c76e', 'N_ItemBoxPos_00', 'shift_x', -780) 
             patch_blyt('hash_0xb061c76e', 'L_Rank_00', 'shift_x', 740) 
             patch_blyt('hash_0xb061c76e', 'L_LapCoin_00', 'shift_x', -650) 
