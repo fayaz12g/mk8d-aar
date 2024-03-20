@@ -45,7 +45,7 @@ from compress import pack
 #### Create Window ####
 #######################
 
-tool_version = "2.0.5"
+tool_version = "3.0.0"
 
 root = customtkinter.CTk()
 root.title(f"Fayaz's Settings {tool_version} for Mario Kart 8 Deluxe 3.0.1")
@@ -100,6 +100,7 @@ corner_HUD = BooleanVar(value=True)
 
 # Generation
 output_yuzu = BooleanVar()
+output_suyu = BooleanVar()
 output_ryujinx = BooleanVar()
 open_when_done = BooleanVar()
 mod_name_var = StringVar(value="Fayaz's Settings")
@@ -312,12 +313,16 @@ def select_mario_folder():
     scaling_factor = (16/9) / (int(numerator_entry.get()) / int(denominator_entry.get()))
     inverse_factor = (int(numerator_entry.get()) / int(denominator_entry.get())) / (16/9)
     username = getpass.getuser()
+    gameid = "0100152000022000"
     if output_yuzu.get() is True:
-        input_folder = f"C:\\Users\\{username}\\AppData\\Roaming\\yuzu\\load\\0100152000022000"
+        input_folder = f"C:/Users/{username}/AppData/Roaming/yuzu/load/{gameid}"
         process_name = "yuzu.exe"
     if output_ryujinx.get() is True:
-        input_folder = f"C:\\Users\\{username}\\AppData\\Roaming\\Ryujinx\\mods\\contents\\0100152000022000"
+        input_folder = f"C:/Users/{username}/AppData/Roaming/Ryujinx/mods/contents/{gameid}"
         process_name = "ryujinx.exe"
+    if output_suyu.get() is True:
+        input_folder = f"C:/Users/{username}/AppData/Roaming/suyu/load/{gameid}"
+        process_name = "suyu.exe"
     else:
         process_name = "yuzu.exe"
     if input_folder:
@@ -456,7 +461,8 @@ def pack_widgets():
 
     emulator_label.pack(pady=10)
     yuzu_checkbox.pack(side="top")
-    ryujinx_checkbox.pack(side="top")
+    ryujinx_checkbox.pack(side="top", pady=5)
+    suyu_checkbox.pack(side="top")
 
     output_folder_button.pack()
     output_folder_button.pack(pady=10)
@@ -519,6 +525,7 @@ def forget_packing():
 
     emulator_label.pack_forget()
     yuzu_checkbox.pack_forget()
+    suyu_checkbox.pack_forget()
     ryujinx_checkbox.pack_forget()
 
     output_folder_button.pack_forget()
@@ -715,8 +722,9 @@ corner_checkbox.select()
 notebook.add("Generate")
 
 emulator_label= customtkinter.CTkLabel(master=notebook.tab("Generate"), text="Select your Emulator OR choose a custom output folder, then click Generate.")
-yuzu_checkbox = customtkinter.CTkRadioButton(master=notebook.tab("Generate"), text="Yuzu", value=1, variable=output_yuzu, command=lambda: [output_ryujinx.set(False), repack_widgets])
-ryujinx_checkbox = customtkinter.CTkRadioButton(master=notebook.tab("Generate"), text="Ryujinx", value=2, variable=output_ryujinx, command=lambda: [output_yuzu.set(False), repack_widgets])   
+yuzu_checkbox = customtkinter.CTkRadioButton(master=notebook.tab("Generate"), text="Yuzu", value=1, variable=output_yuzu, command=lambda: [output_suyu.set(False), output_ryujinx.set(False), repack_widgets()])  
+ryujinx_checkbox = customtkinter.CTkRadioButton(master=notebook.tab("Generate"), text="Ryujinx", value=2, variable=output_ryujinx, command=lambda: [output_yuzu.set(False), output_suyu.set(False), repack_widgets()])  
+suyu_checkbox = customtkinter.CTkRadioButton(master=notebook.tab("Generate"), text="Suyu", value=2, variable=output_suyu, command=lambda: [output_yuzu.set(False), output_ryujinx.set(False), repack_widgets()])  
 
 output_folder_button = customtkinter.CTkButton(master=notebook.tab("Generate"), text="Custom Output Folder", fg_color="gray", hover_color="black", command=select_output_folder)
 
