@@ -35,7 +35,7 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
 007D9448 {hex_value}
 007D944C 010A20EE
 007D9450 1285F0EA
-@stop
+@disabled
 
 {visual_fix}
 
