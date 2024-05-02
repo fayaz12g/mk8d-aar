@@ -40,12 +40,13 @@ from keystone import *
 from decompress import extract_sarc
 from decompress import extract_szs
 from compress import pack
+import pyautogui
 
 #######################
 #### Create Window ####
 #######################
 
-tool_version = "3.0.1"
+tool_version = "3.0.2"
 
 root = customtkinter.CTk()
 root.title(f"Fayaz's Settings {tool_version} for Mario Kart 8 Deluxe 3.0.1")
@@ -60,8 +61,9 @@ windowtitle = customtkinter.CTkLabel(master=root, font=(CTkFont, 20), text="Faya
 ###############################################
 
 # Visuals
-ar_numerator = StringVar(value="16")
-ar_denominator = StringVar(value="9")
+screen_width, screen_height = pyautogui.size()
+ar_numerator = StringVar(value=f"{screen_width}")
+ar_denominator = StringVar(value=f"{screen_height}")
 
 do_split60 = BooleanVar(value=True)
 do_disabledynamic = BooleanVar(value=True)
@@ -562,19 +564,19 @@ notebook = customtkinter.CTkTabview(root, width=10, height=10)
 
 notebook.add("Visuals")
 
-console_label3= customtkinter.CTkLabel(master=notebook.tab("Visuals"), text='Enter Aspect Ratio or Screen Dimensions (ex: 21:9 or 3440x1440):')
+console_label3= customtkinter.CTkLabel(master=notebook.tab("Visuals"), text=f'Aspect Ratio: (Auto-Deteced as {screen_width} x {screen_height}):')
 
 frame = customtkinter.CTkFrame(master=notebook.tab("Visuals"))
 
 numerator_entry = customtkinter.CTkEntry(frame, textvariable=ar_numerator)
 numerator_entry.configure(text_color='gray')
-numerator_entry.bind("<FocusIn>", lambda event: handle_focus_in(numerator_entry, "16"))
-numerator_entry.bind("<FocusOut>", lambda event: handle_focus_out(numerator_entry, "16"))
+numerator_entry.bind("<FocusIn>", lambda event: handle_focus_in(numerator_entry, f"{screen_width}"))
+numerator_entry.bind("<FocusOut>", lambda event: handle_focus_out(numerator_entry, f"{screen_width}"))
 aspect_ratio_divider= customtkinter.CTkLabel(frame, text=":")
 denominator_entry = customtkinter.CTkEntry(frame, textvariable=ar_denominator)
 denominator_entry.configure(text_color='gray')
-denominator_entry.bind("<FocusIn>", lambda event: handle_focus_in(denominator_entry, "9"))
-denominator_entry.bind("<FocusOut>", lambda event: handle_focus_out(denominator_entry, "9"))
+denominator_entry.bind("<FocusIn>", lambda event: handle_focus_in(denominator_entry, f"{screen_height}"))
+denominator_entry.bind("<FocusOut>", lambda event: handle_focus_out(denominator_entry, f"{screen_height}"))
 
 split60 = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="60 FPS in Splitscreen", variable=do_split60)
 disabledynamic = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable Dynamic Resolution", variable=do_disabledynamic)
