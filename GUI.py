@@ -46,11 +46,11 @@ import pyautogui
 #### Create Window ####
 #######################
 
-tool_version = "3.0.2"
+tool_version = "3.1.0"
 
 root = customtkinter.CTk()
 root.title(f"Fayaz's Settings {tool_version} for Mario Kart 8 Deluxe 3.0.1")
-root.geometry("500x720")
+root.geometry("540x760")
 
 customtkinter.set_appearance_mode("system")
 customtkinter.set_default_color_theme("blue")  
@@ -155,7 +155,7 @@ class PrintRedirector:
         self.text_widget = text_widget
         self.buffer = ""
         self.text_widget.configure(state='disabled')  # Disable user input
-        self.text_widget.tag_configure("custom_tag", background='lightgray', foreground='black')
+        # self.text_widget.configure("custom_tag", background='lightgray', foreground='black')
 
     def write(self, text):
         self.buffer += text
@@ -249,34 +249,8 @@ def check_process_running(process_name):
             return True
     return False
 
-class PrintRedirector:
-    def __init__(self, text_widget):
-        self.text_widget = text_widget
-        self.buffer = ""
-        self.text_widget.configure(state='disabled')  # Disable user input
-        self.text_widget.tag_configure("custom_tag", background='lightgray', foreground='black')
-
-    def write(self, text):
-        self.buffer += text
-        self.text_widget.configure(state='normal')  # Enable writing
-        self.text_widget.insert("end", text, "custom_tag")  # Apply custom_tag to the inserted text
-        self.text_widget.see("end")
-        self.text_widget.configure(state='disabled')  # Disable user input again
-
-    def flush(self):
-        self.text_widget.configure(state='normal')  # Enable writing
-        try:
-            self.text_widget.insert("end", self.buffer, "custom_tag")  # Apply custom_tag to the buffered text
-        except Exception as e:
-            self.text_widget.insert("end", f"Error: {e}\n", "custom_tag")  # Display the exception message with custom_tag
-        finally:
-            self.text_widget.see("end")
-            self.text_widget.configure(state='disabled')  # Disable user input again
-            self.buffer = ""
-
 scaling_factor = 0.762
 HUD_pos = "corner"
-
 
     #repack the layour.lyarc folder into file
     #repack the folder into a szs file
@@ -738,7 +712,7 @@ open_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Generate"), text=
 create_patch_button = customtkinter.CTkButton(master=notebook.tab("Generate"), text="Generate", command=create_patch)
 
 console_label= customtkinter.CTkLabel(master=notebook.tab("Generate"), text='Console:')
-scrolled_text = scrolledtext.ScrolledText(master=notebook.tab("Generate"), width=50, height=18, font=("Helvetica", 10))
+scrolled_text = customtkinter.CTkTextbox(master=notebook.tab("Generate"), width=400, height=300, font=("Futura", 15))
 
 progressbar = customtkinter.CTkProgressBar(master=notebook.tab("Generate"), orientation="horizontal")
 progressbar.configure(mode="determinate", determinate_speed=.01, progress_color="green", fg_color="lightgreen", height=6, width=400)
