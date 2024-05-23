@@ -68,10 +68,15 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
                             'hash_0x904e307e', # rc_Viewer_00 in Race
                             'hash_0x61e313d5' # LoadWin_00
                             ]
+    
     rootpane_stretch_y = ['hash_0xcc5d377a', # Background in Menu
                           'hash_0xb291a57f' # Loading Screen
                           ]
 
+    rootpane_stretch_x = ['hash_0xcc5d377a', # Background in Menu
+                          'hash_0xb291a57f' # Loading Screen
+                          ]
+    
     for root, dirs, files in os.walk(blyt_folder):
         for file_name in files:
             if file_name.endswith(".bflyt"):
@@ -130,8 +135,11 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
             if name not in do_not_scale_rootpane:
                 print(f"Scaling root pane vertically for {name}")
                 patch_blyt(name, 'RootPane', 'scale_y', s1)
+            if name in rootpane_stretch_x:
+                patch_blyt(name, 'RootPane', 'scale_x', 1/s1)
              
-        # patch_anim('PaMapIconDragonTears_00_Zoom', 672, 1.28/s1)
+        patch_blyt('hash_0xb061c76e', 'N_All_00', 'scale_y', s1) # Player HUD 
+        patch_blyt('hash_0xb061c76e', 'N_Pause_00', 'scale_y', s1) # Player HUD 
 
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
