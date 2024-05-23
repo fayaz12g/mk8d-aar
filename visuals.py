@@ -13,6 +13,12 @@ def create_visuals(do_split60, do_disabledynamic, do_nosteer, do_dofscaler, do_f
 
     do_split60 = eval(do_split60)
     do_disabledynamic = eval(do_disabledynamic)
+    do_nosteer = eval(do_nosteer)
+    do_dofscaler = eval(do_dofscaler)
+    do_fxaaoff = eval(do_fxaaoff)
+    do_fxaaon = eval(do_fxaaon)
+    do_fxaaonscaler = eval(do_fxaaonscaler)
+    do_lodenhance = eval(do_lodenhance)
     
     if do_split60:
         split60 = "enabled"
