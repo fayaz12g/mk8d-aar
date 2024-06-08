@@ -141,18 +141,18 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
              
         patch_blyt('hash_0xb061c76e', 'N_All_00', 'scale_y', s1) # Player HUD 
         patch_blyt('hash_0xb061c76e', 'N_Pause_00', 'scale_y', s1) # Player HUD 
-        # patch_blyt('hash_0x4141b313', 'RootPane', 'scale_x', s1) #RC Result
-        # patch_blyt('hash_0x64f64f62', 'RootPane', 'scale_x', s1) #RC Result Team
-        # patch_blyt('hash_0x468a66a', 'RootPane', 'scale_x', s1) #RC Result TIme Trial
+        patch_blyt('hash_0x4141b313', 'RootPane', 'scale_x', s1) #RC Result
+        patch_blyt('hash_0x64f64f62', 'RootPane', 'scale_x', s1) #RC Result Team
+        patch_blyt('hash_0x468a66a', 'RootPane', 'scale_x', s1) #RC Result TIme Trial
         patch_blyt('hash_0x9a7a5a0e', 'N_Capture_0', 'scale_x', 1/s1) # Title Screen Background
-        # patch_blyt('hash_0x5078a7b0', 'RootPane', 'scale_x', 1/s1) # Fade Pause
-        # patch_blyt('hash_0xc1e2251e', 'RootPane', 'scale_x', 1/s1) # Page Fade 
-        # patch_blyt('hash_0x79edb528', 'RootPane', 'scale_x', 1/s1) # Page Fade Pause
+        patch_blyt('hash_0x5078a7b0', 'RootPane', 'scale_x', 1/s1) # Fade Pause
+        patch_blyt('hash_0xc1e2251e', 'RootPane', 'scale_x', 1/s1) # Page Fade 
+        patch_blyt('hash_0x79edb528', 'RootPane', 'scale_x', 1/s1) # Page Fade Pause
 
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
-            patch_blyt('hash_0xb061c76e', 'L_ItemBox_00', 'shift_y', do_some_math(261, ratio)) 
-            patch_blyt('hash_0xb061c76e', 'L_Rank_00', 'shift_y', do_some_math(-268, ratio)) 
+            patch_blyt('hash_0xb061c76e', 'L_ItemBox_00', 'shift_y', do_some_math(161, ratio)) 
+            patch_blyt('hash_0xb061c76e', 'L_Rank_00', 'shift_y', do_some_math(-228, ratio)) 
             patch_blyt('hash_0xb061c76e', 'L_LapCoin_00', 'shift_y', do_some_math(-341, ratio)) 
             # patch_blyt('2p', 'L_ItemBox_00', 'shift_y', do_vertical_math(273, ratio)) 
             # patch_blyt('2p', 'L_Rank_00', 'shift_y', do_vertical_math(-294, ratio)) 
