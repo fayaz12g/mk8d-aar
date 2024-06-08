@@ -52,3 +52,4 @@ def do_vertical_math(num, ratio):
     ratio = int(ratio)
     multiplier = ((16/9) - ratio) + 1
     return (num * multiplier)
+
