@@ -44,9 +44,10 @@ def patch_blyt(filename, pane, operation, value):
 def do_some_math(num, ratio):
     num = int(num)
     ratio = int(ratio)
-    newmath = abs(num) - abs(((num/(16/9))*ratio))
+    pp = (((16/9) - ratio / 2) + (ratio))
+    newmath = abs(num) - abs(((num/(16/9))*pp))
     if num < 0:
-        return ((num - newmath)/2)
+        return ((num - newmath))
     else:
         return (num)
 
