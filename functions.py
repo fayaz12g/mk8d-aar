@@ -44,7 +44,11 @@ def patch_blyt(filename, pane, operation, value):
 def do_some_math(num, ratio):
     num = int(num)
     ratio = int(ratio)
-    return ((num/(16/9))*ratio)
+    newmath = abs(num) - abs(((num/(16/9))*ratio))
+    if num < 0:
+        return (num - newmath)
+    else:
+        return (num + newmath)
 
 # This one finds the correct translation in correleation to the aspect ratio
 def do_vertical_math(num, ratio):
