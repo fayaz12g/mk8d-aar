@@ -46,9 +46,9 @@ def do_some_math(num, ratio):
     ratio = int(ratio)
     newmath = abs(num) - abs(((num/(16/9))*ratio))
     if num < 0:
-        return (num - newmath)
+        return ((num - newmath)/2)
     else:
-        return (num + newmath)
+        return (num)
 
 # This one finds the correct translation in correleation to the aspect ratio
 def do_vertical_math(num, ratio):
