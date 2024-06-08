@@ -16,7 +16,7 @@ from threading import Thread
 import shutil
 from download import download_extract_copy
 from patch import create_patch_files
-from functions import float2hex
+from functions import *
 
 def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
     from functions import float2hex
@@ -128,6 +128,7 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         s1 = aspect_ratio / (16/9)
         s2 = 1-s1
         s3 = s2/s1
+        ratio = aspect_ratio
         
         for name in file_names_stripped:
             if name in do_not_scale_rootpane:
@@ -143,4 +144,9 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
 
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
-            # patch_blyt('ChallengeLog_00', 'RootPane', 'shift_y', 540*s2)
+            patch_blyt('hash_0xb061c76e', 'L_ItemBox_00', 'shift_y', do_vertical_math(261, ratio)) 
+            patch_blyt('hash_0xb061c76e', 'L_Rank_00', 'shift_y', do_vertical_math(-268, ratio)) 
+            patch_blyt('hash_0xb061c76e', 'L_LapCoin_00', 'shift_y', do_vertical_math(-341, ratio)) 
+            # patch_blyt('2p', 'L_ItemBox_00', 'shift_y', do_vertical_math(273, ratio)) 
+            # patch_blyt('2p', 'L_Rank_00', 'shift_y', do_vertical_math(-294, ratio)) 
+            # patch_blyt('2p', 'L_LapCoin_00', 'shift_y', do_vertical_math(-319, ratio)) 

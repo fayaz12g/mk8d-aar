@@ -40,3 +40,15 @@ def patch_blyt(filename, pane, operation, value):
     with open(full_path, 'wb') as f:
         f.write(bytes.fromhex(content_new))
 
+# This one finds the correct translation in correleation to the aspect ratio
+def do_some_math(num, ratio):
+    num = int(num)
+    ratio = int(ratio)
+    return ((num/(16/9))*ratio)
+
+# This one finds the correct translation in correleation to the aspect ratio
+def do_vertical_math(num, ratio):
+    num = int(num)
+    ratio = int(ratio)
+    multiplier = ((16/9) - ratio) + 1
+    return (num * multiplier)
