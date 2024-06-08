@@ -46,8 +46,7 @@ def do_some_math(num, ratio):
     ratio = int(ratio)
     pp = ((((16/9) - ratio) / 2) + (ratio))
     newmath = abs(((num/(16/9))*pp) - abs(num))
-    final = ((num/(16/9))*pp)
-    final = (final * -1)
+    final = (num*pp)
     if num < 0:
         print(final)
         return (final)
