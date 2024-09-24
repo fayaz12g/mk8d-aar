@@ -46,10 +46,10 @@ import pyautogui
 #### Create Window ####
 #######################
 
-tool_version = "3.2.0"
+tool_version = "3.3.0"
 
 root = customtkinter.CTk()
-root.title(f"Fayaz's Settings {tool_version} for Mario Kart 8 Deluxe 3.0.1")
+root.title(f"Fayaz's Settings {tool_version} for Mario Kart 8 Deluxe 3.0.3")
 root.geometry("540x760")
 
 customtkinter.set_appearance_mode("system")

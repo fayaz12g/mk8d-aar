@@ -15,7 +15,7 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
     rounded_ratio = functions.calculate_rounded_ratio(float(ratio_value))
     asm_code = functions.generate_asm_code(rounded_ratio)
     hex_value = functions.convert_asm_to_arm64_hex(asm_code)
-    version_variables = ["3.0.1"]
+    version_variables = ["3.0.1", "3.0.3"]
     for version_variable in version_variables:
         file_name = f"main-{version_variable}.pchtxt"
         file_path = os.path.join(patch_folder, file_name)
@@ -23,6 +23,11 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
         if version_variable == "3.0.1":
             nsobidid = "9EF5CAA2D5B933C772358C5AA6FABA15"
             visual_fix = visual_fixesa
+
+        if version_variable == "3.0.3":
+            nsobidid = "6A85262F21B903649BD7C62628D26E43"
+            visual_fix = visual_fixesa
+            
 
         patch_content = f'''@nsobid-{nsobidid}
 
