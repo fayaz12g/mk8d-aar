@@ -369,12 +369,12 @@ def select_mario_folder():
             pack(dir_path2, ">", 1, "")
             shutil.rmtree(dir_path2)
 
-
     # Recompress sarc Files
     for dir_name in os.listdir(cmn_folder):
         if dir_name.lower() not in ["boot", "trial"]:
             dir_path = os.path.join(cmn_folder, dir_name)
             pack(dir_path, ">", -1, "")
+
             shutil.rmtree(dir_path)
 
     print("We are done!")

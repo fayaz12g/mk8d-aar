@@ -37,7 +37,7 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
                     'hash_0xcc5d377a': ['N_Single_00','N_Multi_00','N_Multi_Open_00','N_Multi_Open_01','N_Multi_Open_02','N_Multi_Open_03','N_Multi_Open_04','N_Single_Open_00','N_Single_Open_01','N_Single_Open_02','N_Single_Open_03','N_Single_Open_04',
                                          'N_Online_00','N_LocalCommun_00','N_Record_00','N_amiibo_00','N_MKTV_00','N_Html_00','N_LABO_00','N_DLC_00','N_Sound_00',
                                          'P_BoardShM_00','P_BoardShL_00','W_BoardBlur_M_00','W_BoardBlur_L_00', 'P_Sparkle_01','P_Monogram_01','P_Monogram_02','P_Sparkle_02'], # mn_Background_00
-                    'hash_0xb291a57f':['N_null_00','N_Loop_00','N_Loop_01'], # cmn_LoadScreen_00
+                    # 'hash_0xb291a57f':['N_null_00','N_Loop_00','N_Loop_01'], # cmn_LoadScreen_00
 
                 }
 
@@ -50,7 +50,7 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         for filename, panes in layout_map.items():
             modified_name = filename + "_name"
             path = file_paths.get(modified_name, [])
-            print(modified_name, path)
+            print("Shifting", modified_name)
             
             with open(path, 'rb') as f:
                 content = f.read().hex()
