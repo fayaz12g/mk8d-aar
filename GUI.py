@@ -360,20 +360,23 @@ def select_mario_folder():
     # Perform Pane Strecthing
     patch_blarc(str(ratio_value), HUD_pos, text_folder)
 
+    x = 1
+
     # Compress every folder that has a .bntx inside with the arguments 
     for dir_name in os.listdir(cmn_folder):
         dir_path = os.path.join(cmn_folder, dir_name)
         for dir_name2 in os.listdir(dir_path):
             dir_path2 = os.path.join(dir_path, dir_name2)
             print(f"Recompressing {dir_name2}.szs")
-            pack(dir_path2, ">", 1, "")
+            pack(dir_path2, ">", 1, "", x)
             shutil.rmtree(dir_path2)
 
     # Recompress sarc Files
     for dir_name in os.listdir(cmn_folder):
         if dir_name.lower() not in ["boot", "trial"]:
             dir_path = os.path.join(cmn_folder, dir_name)
-            pack(dir_path, ">", -1, "")
+            pack(dir_path, ">", -1, "", x)
+            x = x + 1
 
             shutil.rmtree(dir_path)
 

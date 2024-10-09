@@ -4,7 +4,7 @@ import time
 import SarcLib
 import libyaz0
 
-def pack(root, endianness, level, outname):
+def pack(root, endianness, level, outname, x):
     if "\\" in root:
         root = "/".join(root.split("\\"))
 
@@ -74,6 +74,8 @@ def pack(root, endianness, level, outname):
         if not outname:
             outname = ''.join([root, ".sarc"])
 
+    if level == -1:
+        print("Repacking root archive. (" + x + "/9)")
     with open(outname, "wb+") as output:
         output.write(outData)
 
