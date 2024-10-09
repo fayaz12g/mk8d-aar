@@ -567,9 +567,9 @@ split60 = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="60 FPS
 disabledynamic = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable Dynamic Resolution", variable=do_disabledynamic)
 nosteer = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable Steer Assist", variable=do_nosteer)
 dofscaler = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="DOF Scaler", variable=do_dofscaler)
-fxaaoff = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="FXAA Off", variable=do_fxaaoff)
-fxaaon = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="FXAA On", variable=do_fxaaon)
-fxaaonscaler = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="FXAA On - Scaler Fix", variable=do_fxaaonscaler)
+fxaaoff = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="FXAA Off", variable=do_fxaaoff, command=lambda: [do_fxaaon.set(False), do_fxaaonscaler.set(False), repack_widgets()])
+fxaaon = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="FXAA On", variable=do_fxaaon, command=lambda: [do_fxaaoff.set(False), do_fxaaonscaler.set(False), repack_widgets()])
+fxaaonscaler = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="FXAA On - Scaler Fix", variable=do_fxaaonscaler, command=lambda: [do_fxaaoff.set(False), do_fxaaon.set(False), repack_widgets()])
 lodenhance = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="LOD Enhancement", variable=do_lodenhance)
 
 bonus_label= customtkinter.CTkLabel(master=notebook.tab("Visuals"), text=f'Bonus mods:')

@@ -9,6 +9,7 @@ from functions import calculate_rounded_ratio, convert_asm_to_arm64_hex, float2h
 
 def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
     visual_fixesa = visual_fixes[0]
+    visual_fixesb = visual_fixes[1]
     scaling_factor = float(scaling_factor)
     ratio_value = float(ratio_value)
     print(f"The scaling factor is {scaling_factor}.")
@@ -26,7 +27,7 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
 
         if version_variable == "3.0.3":
             nsobidid = "6A85262F21B903649BD7C62628D26E43"
-            visual_fix = visual_fixesa
+            visual_fix = visual_fixesb
             
 
         patch_content = f'''@nsobid-{nsobidid}
