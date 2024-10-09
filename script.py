@@ -192,7 +192,11 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         patch_blyt('hash_0xcc5d377a', 'P_BlueBG_00', 'scale_x', 1/s1) # mn_Background_00
         patch_blyt('hash_0xcc5d377a', 'P_Sparkle_00', 'scale_x', 1/s1) # mn_Background_00
         patch_blyt('hash_0xcc5d377a', 'P_Monogram_00', 'scale_x', 1/s1) # mn_Background_00
-        patch_blyt('hash_0xcc5d377a', 'P_BlueBG_00', 'scale_x', 1/s1) # mn_Background_00
+
+        patch_blyt('N_TitelePicAll_00', 'P_BlueBG_00', 'scale_x', 1/s1) # mn_Background_00
+        patch_blyt('P_TiteleBGBack_00', 'P_BlueBG_00', 'scale_y', 1/s1) # mn_Background_00
+        patch_blyt('P_TiteleBG_00', 'P_BlueBG_00', 'scale_y', 1/s1) # mn_Background_00
+        patch_blyt('P_TiteleBG_01', 'P_BlueBG_00', 'scale_y', 1/s1) # mn_Background_00
 
         patch_blyt('hash_0x61e313d5', 'N_All_00', 'scale_x', 1/s1) # cm_LoadWin_00
         patch_blyt('hash_0x61e313d5', 'N_All_00', 'scale_y', 1/s1) # cm_LoadWin_00
