@@ -208,8 +208,8 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         # patch_blyt('hash_0xb291a57f', 'P_FadeBG_00', 'scale_x', 1/s1) # cm_LoadScreen_00
         # patch_blyt('hash_0xb291a57f', 'P_FadeBG_00', 'scale_y', 1/s1) # cm_LoadScreen_00
 
-        patch_blyt('hash_0x46305bab', 'N_All_00', 'scale_x', 1/s1) # cm_Window_00
-        patch_blyt('hash_0x46305bab', 'N_All_01', 'scale_x', s1) # cm_Window_00
+        # patch_blyt('hash_0x46305bab', 'N_All_00', 'scale_x', 1/s1) # cm_Window_00
+        # patch_blyt('hash_0x46305bab', 'N_All_01', 'scale_x', s1) # cm_Window_00
 
         patch_blyt('hash_0x39dcd6cb', 'RootPane', 'scale_x', s1) # rc_Page_RaceResult
         patch_blyt('hash_0x4141b313', 'RootPane', 'scale_x', s1) # rc_Result_00
