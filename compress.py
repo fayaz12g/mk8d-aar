@@ -75,7 +75,10 @@ def pack(root, endianness, level, outname, x):
             outname = ''.join([root, ".sarc"])
 
     if level == -1:
-        print("Repacking root archive. (" + x + "/9)")
+        print("Repacking root archive. (" + f"{x}" + "/9)")
+        
+    if level == 1:
+        print("Repacking sub archive. (" + f"{x}" + "/100)")
     with open(outname, "wb+") as output:
         output.write(outData)
 

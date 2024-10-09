@@ -118,7 +118,7 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
                             'hash_0x5078a7b0', # Fade Pause
                             'hash_0xc1e2251e', # Page Fade 
                             'hash_0x79edb528', # Page Fade Pause
-                             '', # mn_L_BlurBG_00
+                            'hash_0x1ef48ed7', # mn_L_BlurBG_00
                             ]
     
     rootpane_stretch_y = ['hash_0xcc5d377a', # Background in Menu
@@ -199,6 +199,9 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
 
         patch_blyt('hash_0x9a7a5a0e', 'N_Capture_00', 'scale_x', 1/s1) # mn_TitleScene_00
         patch_blyt('hash_0x9a7a5a0e', 'N_Capture_01', 'scale_x', 1/s1) # mn_TitleScene_00
+        patch_blyt('hash_0x9a7a5a0e', 'N_Capture_00', 'scale_y', 1/s1) # mn_TitleScene_00
+        patch_blyt('hash_0x9a7a5a0e', 'N_Capture_01', 'scale_y', 1/s1) # mn_TitleScene_00
+
 
         patch_blyt('hash_0x44e1a771', 'N_Capture_00', 'scale_x', 1/s1) # mn_ModeSlct_00
         patch_blyt('hash_0x44e1a771', 'N_Capture_00', 'scale_y', 1/s1) # mn_ModeSlct_00
