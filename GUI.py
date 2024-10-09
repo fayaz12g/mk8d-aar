@@ -74,6 +74,9 @@ do_fxaaon = BooleanVar(value=False)
 do_fxaaonscaler = BooleanVar(value=True)
 do_lodenhance = BooleanVar(value=True)
 
+do_first = BooleanVar(value=True)
+do_colored = BooleanVar(value=True)
+
 
 
 # Legacy Visuals
@@ -409,6 +412,9 @@ def pack_widgets():
     fxaaonscaler.pack(padx=5, pady=5)
     lodenhance.pack(padx=5, pady=5) 
 
+    crownlabel.pack(padx=5, pady=5) 
+    coloredlabel.pack(padx=5, pady=5) 
+
     
     image_label.pack()
 
@@ -560,6 +566,9 @@ fxaaoff = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="FXAA O
 fxaaon = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="FXAA On", variable=do_fxaaon)
 fxaaonscaler = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="FXAA On - Scaler Fix", variable=do_fxaaonscaler)
 lodenhance = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="LOD Enhancement", variable=do_lodenhance)
+
+crownlabel = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="First Place Crown", variable=do_first)
+coloredlabel = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Colored Yoshi/Birdo CPU", variable=do_colored)
 
 ##########################
 ####### Controller #######
