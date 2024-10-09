@@ -332,7 +332,7 @@ def select_mario_folder():
     download_extract_copy(input_folder, mod_name)
 
     # Create the PCHTXT Files
-    visual_fixes = create_visuals(str(do_split60.get()), str(do_disabledynamic.get()), str(do_nosteer.get()), str(do_dofscaler.get()), str(do_fxaaoff.get()), str(do_fxaaon.get()), str(do_fxaaonscaler.get()), str(do_lodenhance.get()))
+    visual_fixes = create_visuals(str(do_split60.get()), str(do_disabledynamic.get()), str(do_nosteer.get()), str(do_dofscaler.get()), str(do_fxaaoff.get()), str(do_fxaaon.get()), str(do_fxaaonscaler.get()), str(do_lodenhance.get()), str(do_first.get()), str(do_colored.get()))
     create_patch_files(patch_folder, str(inverse_factor), str(scaling_factor), visual_fixes)
     romfs_folder = os.path.join(input_folder, mod_name)
 

@@ -1,4 +1,4 @@
-def create_visuals(do_split60, do_disabledynamic, do_nosteer, do_dofscaler, do_fxaaoff, do_fxaaon, do_fxaaonscaler, do_lodenhance):
+def create_visuals(do_split60, do_disabledynamic, do_nosteer, do_dofscaler, do_fxaaoff, do_fxaaon, do_fxaaonscaler, do_lodenhance, do_first, do_colored):
 
     split60 = "disabled"
     dynamic = "disabled"
@@ -8,6 +8,9 @@ def create_visuals(do_split60, do_disabledynamic, do_nosteer, do_dofscaler, do_f
     fxaaon = "disabled"
     fxaaonscaler = "disabled"
     lodenhance = "disabled"
+    first = "disabled"
+    colored = "disabled"
+
 
     visual_fixes = []
 
@@ -19,6 +22,8 @@ def create_visuals(do_split60, do_disabledynamic, do_nosteer, do_dofscaler, do_f
     do_fxaaon = eval(do_fxaaon)
     do_fxaaonscaler = eval(do_fxaaonscaler)
     do_lodenhance = eval(do_lodenhance)
+    do_first = eval(do_first)
+    do_colored = eval(do_colored)
     
     if do_split60:
         split60 = "enabled"
@@ -36,6 +41,10 @@ def create_visuals(do_split60, do_disabledynamic, do_nosteer, do_dofscaler, do_f
         fxaaonscaler = "enabled"
     if do_lodenhance:
         lodenhance = "enabled"
+    if do_first:
+        first = "enabled"
+    if do_colored:
+        colored = "enabled"
         
     visuals3_0_1 = f'''// 60 FPS in Splitscreen
 @{split60}
@@ -79,6 +88,21 @@ def create_visuals(do_split60, do_disabledynamic, do_nosteer, do_dofscaler, do_f
 006F051C 001AB0EE
 00AF41C4 000AB9EE
 00B1EB34 000ABBEE
+@disabled
+
+// First Place Crown
+@{first}
+00551D14 D00A05EB030052E3
+0069485C 082090E5010052E3090000CA21002DE9045091E5015A45E2D85045E23C0095E50B5190E7240095E5000050E32100BDE80150A0030EF0A0E1
+@disabled
+
+// Colored Yoshi and Birdo CPU
+@{colored}
+0054810C A23205EB
+00548054 D03205EB
+00694B9C 1020D8E5040050E3100050132C0050130200001A0620A0E1080052E3092042C20EF0A0E1
+@disabled
+
 @stop
 '''
     visual_fixes.append(visuals3_0_1)
