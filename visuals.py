@@ -83,7 +83,7 @@ def create_visuals(do_split60, do_disabledynamic, do_nosteer, do_dofscaler, do_f
 @disabled
 
 // LOD Enhancement
-@{lodenhance}
+@disabled
 0088ED3C 0020A0E3
 006F051C 001AB0EE
 00AF41C4 000AB9EE
