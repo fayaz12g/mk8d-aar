@@ -105,7 +105,7 @@ corner_HUD = BooleanVar(value=True)
 
 # Generation
 output_yuzu = BooleanVar()
-output_suyu = BooleanVar()
+output_sudachi = BooleanVar()
 output_ryujinx = BooleanVar()
 open_when_done = BooleanVar()
 mod_name_var = StringVar(value="Fayaz's Settings")
@@ -299,9 +299,9 @@ def select_mario_folder():
     if output_ryujinx.get() is True:
         input_folder = f"C:/Users/{username}/AppData/Roaming/Ryujinx/mods/contents/{gameid}"
         process_name = "ryujinx.exe"
-    if output_suyu.get() is True:
-        input_folder = f"C:/Users/{username}/AppData/Roaming/suyu/load/{gameid}"
-        process_name = "suyu.exe"
+    if output_sudachi.get() is True:
+        input_folder = f"C:/Users/{username}/AppData/Roaming/sudachi/load/{gameid}"
+        process_name = "sudachi.exe"
     else:
         process_name = "yuzu.exe"
     if input_folder:
@@ -444,7 +444,7 @@ def pack_widgets():
     emulator_label.pack(pady=10)
     yuzu_checkbox.pack(side="top")
     ryujinx_checkbox.pack(side="top", pady=5)
-    suyu_checkbox.pack(side="top")
+    sudachi_checkbox.pack(side="top")
 
     output_folder_button.pack()
     output_folder_button.pack(pady=10)
@@ -484,6 +484,10 @@ def forget_packing():
     fxaaonscaler.pack_forget() 
     lodenhance.pack_forget() 
 
+    crownlabel.pack_forget() 
+    coloredlabel.pack_forget() 
+
+
     image_label.pack_forget()
     image_layout_label.pack_forget()
     
@@ -507,7 +511,7 @@ def forget_packing():
 
     emulator_label.pack_forget()
     yuzu_checkbox.pack_forget()
-    suyu_checkbox.pack_forget()
+    sudachi_checkbox.pack_forget()
     ryujinx_checkbox.pack_forget()
 
     output_folder_button.pack_forget()
@@ -707,9 +711,9 @@ corner_checkbox.select()
 notebook.add("Generate")
 
 emulator_label= customtkinter.CTkLabel(master=notebook.tab("Generate"), text="Select your Emulator OR choose a custom output folder, then click Generate.")
-yuzu_checkbox = customtkinter.CTkRadioButton(master=notebook.tab("Generate"), text="Yuzu", value=1, variable=output_yuzu, command=lambda: [output_suyu.set(False), output_ryujinx.set(False), repack_widgets()])  
-ryujinx_checkbox = customtkinter.CTkRadioButton(master=notebook.tab("Generate"), text="Ryujinx", value=2, variable=output_ryujinx, command=lambda: [output_yuzu.set(False), output_suyu.set(False), repack_widgets()])  
-suyu_checkbox = customtkinter.CTkRadioButton(master=notebook.tab("Generate"), text="Suyu", value=2, variable=output_suyu, command=lambda: [output_yuzu.set(False), output_ryujinx.set(False), repack_widgets()])  
+yuzu_checkbox = customtkinter.CTkRadioButton(master=notebook.tab("Generate"), text="Yuzu/Torzu", value=1, variable=output_yuzu, command=lambda: [output_sudachi.set(False), output_ryujinx.set(False), repack_widgets()])  
+ryujinx_checkbox = customtkinter.CTkRadioButton(master=notebook.tab("Generate"), text="Ryujinx", value=2, variable=output_ryujinx, command=lambda: [output_yuzu.set(False), output_sudachi.set(False), repack_widgets()])  
+sudachi_checkbox = customtkinter.CTkRadioButton(master=notebook.tab("Generate"), text="Sudachi", value=2, variable=output_sudachi, command=lambda: [output_yuzu.set(False), output_ryujinx.set(False), repack_widgets()])  
 
 output_folder_button = customtkinter.CTkButton(master=notebook.tab("Generate"), text="Custom Output Folder", fg_color="gray", hover_color="black", command=select_output_folder)
 
