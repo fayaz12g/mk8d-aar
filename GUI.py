@@ -405,16 +405,16 @@ def pack_widgets():
     
     split60.pack(padx=5, pady=5)
     disabledynamic.pack(padx=5, pady=5)
-    nosteer.pack(padx=5, pady=5)
     dofscaler.pack(padx=5, pady=5)
     fxaaoff.pack(padx=5, pady=5)
     fxaaon.pack(padx=5, pady=5)
     fxaaonscaler.pack(padx=5, pady=5)
     lodenhance.pack(padx=5, pady=5) 
 
+    bonus_label.pack(padx=10, pady=10)
     crownlabel.pack(padx=5, pady=5) 
     coloredlabel.pack(padx=5, pady=5) 
-
+    nosteer.pack(padx=5, pady=5)
     
     image_label.pack()
 
@@ -477,15 +477,16 @@ def forget_packing():
     
     split60.pack_forget() 
     disabledynamic.pack_forget()
-    nosteer.pack_forget()
     dofscaler.pack_forget() 
     fxaaoff.pack_forget() 
     fxaaon.pack_forget()
     fxaaonscaler.pack_forget() 
     lodenhance.pack_forget() 
 
+    bonus_label.pack_forget()
     crownlabel.pack_forget() 
     coloredlabel.pack_forget() 
+    nosteer.pack_forget()
 
 
     image_label.pack_forget()
@@ -571,6 +572,7 @@ fxaaon = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="FXAA On
 fxaaonscaler = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="FXAA On - Scaler Fix", variable=do_fxaaonscaler)
 lodenhance = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="LOD Enhancement", variable=do_lodenhance)
 
+bonus_label= customtkinter.CTkLabel(master=notebook.tab("Visuals"), text=f'Bonus mods:')
 crownlabel = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="First Place Crown", variable=do_first)
 coloredlabel = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Colored Yoshi/Birdo CPU", variable=do_colored)
 
