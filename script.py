@@ -37,10 +37,11 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
                     'hash_0xcc5d377a': ['N_Single_00','N_Multi_00','N_Multi_Open_00','N_Multi_Open_01','N_Multi_Open_02','N_Multi_Open_03','N_Multi_Open_04','N_Single_Open_00','N_Single_Open_01','N_Single_Open_02','N_Single_Open_03','N_Single_Open_04',
                                          'N_Online_00','N_LocalCommun_00','N_Record_00','N_amiibo_00','N_MKTV_00','N_Html_00','N_LABO_00','N_DLC_00','N_Sound_00',
                                          'P_BoardShM_00','P_BoardShL_00','W_BoardBlur_M_00','W_BoardBlur_L_00', 'P_Sparkle_01','P_Monogram_01','P_Monogram_02','P_Sparkle_02'], # mn_Background_00
+                    'hash_0xb291a57f':['N_null_00','N_Loop_00','N_Loop_01'], # cmn_LoadScreen_00
 
                 }
 
-    def patch_ui_layouts(layout_map, direction):
+    def patch_ui_layouts(direction):
         if direction == "x":
             offset = 0x40
         if direction == 'y':
@@ -48,15 +49,11 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
 
         for filename, panes in layout_map.items():
             modified_name = filename + "_name"
-            paths = file_paths.get(modified_name, [])
+            path = file_paths.get(modified_name, [])
+            print(modified_name, path)
             
-            if not paths:
-                default_path = os.path.join(unpacked_folder, "region_common", "ui", "GameMain", "blyt", f"{filename}.bflyt")
-                paths.append(default_path)
-            
-            for full_path_of_file in paths:
-                with open(full_path_of_file, 'rb') as f:
-                    content = f.read().hex()
+            with open(path, 'rb') as f:
+                content = f.read().hex()
                 
                 start_rootpane = content.index(b'RootPane'.hex())
                 
@@ -70,13 +67,10 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
                     
                     new_value = (current_value * s1**-1)
                     new_value_hex = float2hex(new_value)
-
-                    if pane == "L_SetItem_00" or pane == "L_SetItem_01" or pane == "L_SetItem_02" :
-                        print(pane, current_value, new_value)
                     
                     content = content[:idx] + new_value_hex + content[idx+8:]
                 
-                with open(full_path_of_file, 'wb') as f:
+                with open(path, 'wb') as f:
                     f.write(bytes.fromhex(content))
     
     def patch_blyt(filename, pane, operation, value):
@@ -118,7 +112,6 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
     do_not_scale_rootpane = [
                             'hash_0xb061c76e', #rc_RaceView_1P_00 in Race
                             'hash_0x904e307e', # rc_Viewer_00 in Race
-                            'hash_0x61e313d5' # LoadWin_00
                             'hash_0x5078a7b0' # Fade Pause
                             'hash_0xc1e2251e' # Page Fade 
                             'hash_0x79edb528'# Page Fade Pause
@@ -194,9 +187,16 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         patch_blyt('hash_0xcc5d377a', 'P_Monogram_00', 'scale_x', 1/s1) # mn_Background_00
         patch_blyt('hash_0xcc5d377a', 'P_BlueBG_00', 'scale_x', 1/s1) # mn_Background_00
 
+        patch_blyt('hash_0x61e313d5', 'N_All_00', 'scale_x', 1/s1) # cm_LoadWin_00
+        patch_blyt('hash_0x61e313d5', 'N_All_00', 'scale_y', 1/s1) # cm_LoadWin_00
+
+        # patch_blyt('hash_0xb291a57f', 'P_FadeBG_00', 'scale_x', 1/s1) # cm_LoadScreen_00
+        # patch_blyt('hash_0xb291a57f', 'P_FadeBG_00', 'scale_y', 1/s1) # cm_LoadScreen_00
+
+
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
-            patch_ui_layouts(layout_map, "x")
+            patch_ui_layouts("x")
 
             
     else:
@@ -225,13 +225,5 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         patch_blyt('hash_0x79edb528', 'RootPane', 'scale_x', 1/s1) # Page Fade Pause
 
         if HUD_pos == 'corner':
-            print("Shifitng elements for corner HUD")
-            patch_blyt('hash_0xb061c76e', 'L_ItemBox_00', 'shift_y', do_some_math(101, ratio)) 
-            patch_blyt('hash_0xb061c76e', 'L_Rank_00', 'shift_y', do_some_math(-288, ratio)) 
-            patch_blyt('hash_0xb061c76e', 'L_LapCoin_00', 'shift_y', do_some_math(-371, ratio)) 
-            # patch_blyt('2p', 'L_ItemBox_00', 'shift_y', do_vertical_math(273, ratio)) 
-            # patch_blyt('2p', 'L_Rank_00', 'shift_y', do_vertical_math(-294, ratio)) 
-            # patch_blyt('2p', 'L_LapCoin_00', 'shift_y', do_vertical_math(-319, ratio)) 
-
-                        
+            print("Shifitng elements for corner HUD")                
             patch_ui_layouts("y")
