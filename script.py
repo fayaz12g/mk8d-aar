@@ -25,7 +25,52 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
     aspect_ratio = float(aspect_ratio)
     print(f"Aspect ratio is {aspect_ratio}")
     HUD_pos = str(HUD_pos)
-     
+    
+    
+    layout_map = {
+                    'Throbber': ['A_Save_00'],
+                    'Counter': ['L_Cost_00'],
+                }
+
+    def patch_ui_layouts(direction):
+        if direction == "x":
+            offset = 0x40
+        if direction == 'y':
+            offset = 0x48
+
+        for filename, panes in layout_map.items():
+            modified_name = filename + "_name"
+            paths = file_paths.get(modified_name, [])
+            
+            if not paths:
+                default_path = os.path.join(unpacked_folder, "region_common", "ui", "GameMain", "blyt", f"{filename}.bflyt")
+                paths.append(default_path)
+            
+            for full_path_of_file in paths:
+                with open(full_path_of_file, 'rb') as f:
+                    content = f.read().hex()
+                
+                start_rootpane = content.index(b'RootPane'.hex())
+                
+                for pane in panes:
+                    pane_hex = pane.encode('utf-8').hex()
+                    start_pane = content.index(pane_hex, start_rootpane)
+                    idx = start_pane + offset 
+                    
+                    current_value_hex = content[idx:idx+8]
+                    current_value = hex2float(current_value_hex)
+                    
+                    new_value = (current_value * s1**-1)
+                    new_value_hex = float2hex(new_value)
+
+                    if pane == "L_SetItem_00" or pane == "L_SetItem_01" or pane == "L_SetItem_02" :
+                        print(pane, current_value, new_value)
+                    
+                    content = content[:idx] + new_value_hex + content[idx+8:]
+                
+                with open(full_path_of_file, 'wb') as f:
+                    f.write(bytes.fromhex(content))
+    
     def patch_blyt(filename, pane, operation, value):
         if value < 1:
             command = "Squishing"
@@ -123,6 +168,8 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
             patch_blyt('hash_0xb061c76e', 'L_Rank_00', 'shift_x', 740) 
             patch_blyt('hash_0xb061c76e', 'L_LapCoin_00', 'shift_x', -650) 
 
+            patch_ui_layouts("x")
+
             
     else:
         s1 = aspect_ratio / (16/9)
@@ -157,3 +204,6 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
             # patch_blyt('2p', 'L_ItemBox_00', 'shift_y', do_vertical_math(273, ratio)) 
             # patch_blyt('2p', 'L_Rank_00', 'shift_y', do_vertical_math(-294, ratio)) 
             # patch_blyt('2p', 'L_LapCoin_00', 'shift_y', do_vertical_math(-319, ratio)) 
+
+                        
+            patch_ui_layouts("y")

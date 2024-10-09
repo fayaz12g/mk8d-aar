@@ -4,6 +4,9 @@ import os
 import keystone
 from keystone import *
 
+def hex2float(h):
+    return struct.unpack('<f', struct.pack('>I', int(h, 16)))[0]
+
 def convert_asm_to_arm64_hex(asm_code):
     import binascii
     ks = Ks(KS_ARCH_ARM, KS_MODE_ARM)
