@@ -163,7 +163,7 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         patch_blyt('hash_0x64f64f62', 'RootPane', 'scale_x', s1) #RC Result Team
         patch_blyt('hash_0x468a66a', 'RootPane', 'scale_x', s1) #RC Result TIme Trial
 
-        patch_blyt('hash_0x196a863d', 'RootPane', 'scale_x', 1/s1) # bt_TitleLoading_00
+        patch_blyt('hash_0x196a863d', 'RootPane', 'scale_x', s1) # bt_TitleLoading_00
 
         patch_blyt('hash_0x196a863d', 'N_Logo_01', 'scale_x', s1) # bt_TitleLoading_00
         patch_blyt('hash_0x196a863d', 'N_Logo_00', 'scale_x', s1) # bt_TitleLoading_00
