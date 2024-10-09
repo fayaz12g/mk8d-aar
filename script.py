@@ -38,6 +38,9 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
                                          'N_Online_00','N_LocalCommun_00','N_Record_00','N_amiibo_00','N_MKTV_00','N_Html_00','N_LABO_00','N_DLC_00','N_Sound_00',
                                          'P_BoardShM_00','P_BoardShL_00','W_BoardBlur_M_00','W_BoardBlur_L_00', 'P_Sparkle_01','P_Monogram_01','P_Monogram_02','P_Sparkle_02'], # mn_Background_00
                     # 'hash_0xb291a57f':['N_null_00','N_Loop_00','N_Loop_01'], # cmn_LoadScreen_00
+                    'hash_0x9a7a5a0e': ['N_PressABtn_00','N_Logo_00'], # mn_TitleScreen_00
+                    'hash_0x6ec7bb3c': ['N_Btn_00'], # mn_TopMenuNX_00
+                    'hash_0x44e1a771': ['N_Board_00', 'N_Single_00', 'N_Multi_00'], # mn_ModeSlct_00
 
                 }
 
@@ -112,9 +115,10 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
     do_not_scale_rootpane = [
                             'hash_0xb061c76e', #rc_RaceView_1P_00 in Race
                             'hash_0x904e307e', # rc_Viewer_00 in Race
-                            'hash_0x5078a7b0' # Fade Pause
-                            'hash_0xc1e2251e' # Page Fade 
-                            'hash_0x79edb528'# Page Fade Pause
+                            'hash_0x5078a7b0', # Fade Pause
+                            'hash_0xc1e2251e', # Page Fade 
+                            'hash_0x79edb528', # Page Fade Pause
+                             '', # mn_L_BlurBG_00
                             ]
     
     rootpane_stretch_y = ['hash_0xcc5d377a', # Background in Menu
@@ -163,6 +167,11 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
 
         patch_blyt('hash_0x196a863d', 'RootPane', 'scale_x', 1/s1) # bt_TitleLoading_00
 
+        patch_blyt('hash_0x196a863d', 'N_Logo_01', 'scale_x', s1) # bt_TitleLoading_00
+        patch_blyt('hash_0x196a863d', 'N_Logo_00', 'scale_x', s1) # bt_TitleLoading_00
+
+        patch_blyt('hash_0x196a863d', 'N_All_01', 'scale_y', 1/s1) # bt_TitleLoading_00
+
         patch_blyt('hash_0x196a863d', 'N_CheckBG_00', 'scale_x', 1/s1) # bt_TitleLoading_00
         patch_blyt('hash_0x196a863d', 'N_CheckBG_00', 'scale_y', 1/s1) # bt_TitleLoading_00
 
@@ -190,8 +199,20 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         patch_blyt('hash_0x61e313d5', 'N_All_00', 'scale_x', 1/s1) # cm_LoadWin_00
         patch_blyt('hash_0x61e313d5', 'N_All_00', 'scale_y', 1/s1) # cm_LoadWin_00
 
+        patch_blyt('hash_0x9a7a5a0e', 'N_Capture_00', 'scale_x', 1/s1) # mn_TitleScene_00
+        patch_blyt('hash_0x9a7a5a0e', 'N_Capture_01', 'scale_x', 1/s1) # mn_TitleScene_00
+
+        patch_blyt('hash_0x44e1a771', 'N_Capture_00', 'scale_x', 1/s1) # mn_ModeSlct_00
+        patch_blyt('hash_0x44e1a771', 'N_Capture_00', 'scale_y', 1/s1) # mn_ModeSlct_00
+
         # patch_blyt('hash_0xb291a57f', 'P_FadeBG_00', 'scale_x', 1/s1) # cm_LoadScreen_00
         # patch_blyt('hash_0xb291a57f', 'P_FadeBG_00', 'scale_y', 1/s1) # cm_LoadScreen_00
+
+        patch_blyt('hash_0x46305bab', 'P_BG_00', 'scale_x', 1/s1) # cm_Window_00
+
+        patch_blyt('hash_0x39dcd6cb', 'RootPane', 'scale_x', s1) # rc_Page_RaceResult
+        patch_blyt('hash_0x4141b313', 'RootPane', 'scale_x', s1) # rc_Result_00
+
 
 
         if HUD_pos == 'corner':
