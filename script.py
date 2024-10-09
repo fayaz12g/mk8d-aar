@@ -28,11 +28,19 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
     
     
     layout_map = {
-                    'Throbber': ['A_Save_00'],
-                    'Counter': ['L_Cost_00'],
+                    'hash_0x196a863d': ['N_LensFlare_00', 'N_All_01'], # Title Loading
+                    'hash_0xca612e43': ['L_RaceNum_00', 'L_BtTimer_Ml', 'N_BtInfoView_01', 'N_BtInfoView_00', 'L_BtStartRule_00', 'L_BtKeidoroWantedPos00', 'L_BtTeamScore_00', 'L_ShineScore_00'], # rc_RaceView_cmn_00
+                    'hash_0xb061c76e': ['L_BtScore_00', 'L_BtCoinCount_00', 'L_BtKeidoroCoin_00', 'L_Alarm_00', 'L_Alarm_01', 'N_ItemBoxPos_00', 'L_Rank_00', 'L_LapCoin_00'], # rc_RaceView_1P_00
+                    'hash_0xa136fd7c': ['N_BtScore_MlTeamPos_00', 'L_BtCoinCount_00', 'L_BtKeidoroCoin_00', 'L_BtStartRule_00'], # rc_RaceView_2P_MI
+                    'hash_0x639520ee': ['N_BtScore_MlTeamPos_00', 'L_BtCoinCount_00', 'L_BtKeidoroCoin_00', 'L_BtStartRule_00'], # rc_RaceView_4P_MI
+                    'hash_0x4141b313': ['N_All_00'], # rc_Result_00
+                    'hash_0xcc5d377a': ['N_Single_00','N_Multi_00','N_Multi_Open_00','N_Multi_Open_01','N_Multi_Open_02','N_Multi_Open_03','N_Multi_Open_04','N_Single_Open_00','N_Single_Open_01','N_Single_Open_02','N_Single_Open_03','N_Single_Open_04',
+                                         'N_Online_00','N_LocalCommun_00','N_Record_00','N_amiibo_00','N_MKTV_00','N_Html_00','N_LABO_00','N_DLC_00','N_Sound_00',
+                                         'P_BoardShM_00','P_BoardShL_00','W_BoardBlur_M_00','W_BoardBlur_L_00', 'P_Sparkle_01','P_Monogram_01','P_Monogram_02','P_Sparkle_02'], # mn_Background_00
+
                 }
 
-    def patch_ui_layouts(direction):
+    def patch_ui_layouts(layout_map, direction):
         if direction == "x":
             offset = 0x40
         if direction == 'y':
@@ -109,9 +117,11 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
    
     do_not_scale_rootpane = [
                             'hash_0xb061c76e', #rc_RaceView_1P_00 in Race
-                            'hash_0xb291a57f' # Loading Screen
                             'hash_0x904e307e', # rc_Viewer_00 in Race
                             'hash_0x61e313d5' # LoadWin_00
+                            'hash_0x5078a7b0' # Fade Pause
+                            'hash_0xc1e2251e' # Page Fade 
+                            'hash_0x79edb528'# Page Fade Pause
                             ]
     
     rootpane_stretch_y = ['hash_0xcc5d377a', # Background in Menu
@@ -149,9 +159,6 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         
         patch_blyt('hash_0x9a7a5a0e', 'N_Capture_0', 'scale_x', 1/s1) # Title Screen Background
         # patch_blyt('hash_0x5381afbb', 'RootPane', 'scale_x', 1) # Fade 
-        patch_blyt('hash_0x5078a7b0', 'RootPane', 'scale_x', 1) # Fade Pause
-        patch_blyt('hash_0xc1e2251e', 'RootPane', 'scale_x', 1) # Page Fade 
-        patch_blyt('hash_0x79edb528', 'RootPane', 'scale_x', 1) # Page Fade Pause
         patch_blyt('hash_0xb061c76e', 'N_Pause_00', 'scale_x', s1) # Player HUD 
         # patch_blyt('hash_0xb291a57f', 'N_Loop_00', 'scale_x', s1) # Loading Screen Elements
         # patch_blyt('hash_0xb291a57f', 'N_Loop_01', 'scale_x', s1) # Loading Screen Elements
@@ -161,14 +168,35 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         patch_blyt('hash_0x64f64f62', 'RootPane', 'scale_x', s1) #RC Result Team
         patch_blyt('hash_0x468a66a', 'RootPane', 'scale_x', s1) #RC Result TIme Trial
 
+        patch_blyt('hash_0x196a863d', 'RootPane', 'scale_x', 1/s1) # bt_TitleLoading_00
+
+        patch_blyt('hash_0x196a863d', 'N_CheckBG_00', 'scale_x', 1/s1) # bt_TitleLoading_00
+        patch_blyt('hash_0x196a863d', 'N_CheckBG_00', 'scale_y', 1/s1) # bt_TitleLoading_00
+
+        patch_blyt('hash_0x196a863d', 'P_Black_BG_00', 'scale_x', 1/s1) # bt_TitleLoading_00
+        patch_blyt('hash_0x196a863d', 'P_Black_BG_00', 'scale_y', 1/s1) # bt_TitleLoading_00
+
+        patch_blyt('hash_0x196a863d', 'P_BG_02', 'scale_x', 1/s1) # bt_TitleLoading_00
+        patch_blyt('hash_0x196a863d', 'P_BG_02', 'scale_y', 1/s1) # bt_TitleLoading_00
+
+        patch_blyt('hash_0xca612e43', 'L_Fade_00', 'scale_x', 1/s1) # rc_RaceView_Cmn_00
+
+        patch_blyt('hash_0xb061c76e', 'L_Fade_00', 'scale_x', 1/s1) # rc_RaceView_1P_00
+        patch_blyt('hash_0xa136fd7c', 'L_Fade_00', 'scale_x', 1/s1) # rc_RaceView_2P_MI
+        patch_blyt('hash_0x639520ee', 'L_Fade_00', 'scale_x', 1/s1) # rc_RaceView_4P_MI
+
+
+        patch_blyt('hash_0xfe743133', 'P_BG_00', 'scale_x', 1/s1) # rc_Pause_Cmn_00
+
+        
+        patch_blyt('hash_0xcc5d377a', 'P_BlueBG_00', 'scale_x', 1/s1) # mn_Background_00
+        patch_blyt('hash_0xcc5d377a', 'P_Sparkle_00', 'scale_x', 1/s1) # mn_Background_00
+        patch_blyt('hash_0xcc5d377a', 'P_Monogram_00', 'scale_x', 1/s1) # mn_Background_00
+        patch_blyt('hash_0xcc5d377a', 'P_BlueBG_00', 'scale_x', 1/s1) # mn_Background_00
+
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
-            patch_blyt('hash_0xb061c76e', 'L_ItemBox_00', 'shift_x', -220) 
-            # patch_blyt('hash_0xb061c76e', 'N_ItemBoxPos_00', 'shift_x', -780) 
-            patch_blyt('hash_0xb061c76e', 'L_Rank_00', 'shift_x', 740) 
-            patch_blyt('hash_0xb061c76e', 'L_LapCoin_00', 'shift_x', -650) 
-
-            patch_ui_layouts("x")
+            patch_ui_layouts(layout_map, "x")
 
             
     else:
