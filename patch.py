@@ -5,7 +5,7 @@ import functions
 import struct
 import math
 
-from functions import calculate_rounded_ratio, convert_asm_to_arm64_hex, float2hex
+from functions import *
 
 def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
     scaling_factor = float(scaling_factor)
@@ -31,9 +31,38 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
             nsobidid = "2452C49BC26EC15904C507A34B6F16AE"
             visual_fix = visual_fixes[2]
 
-        elif version_variable == "3.0.5":
+        if version_variable == "3.0.5":
             nsobidid = "FE941ED5BA14BE5D505698DA1BBF4FE7"
             visual_fix = visual_fixes[3]
+            
+            # Step 1: float -> hex string
+            hex_str = float_to_hex(scaling_factor)
+            print(f"Float {scaling_factor} -> hex {hex_str}")
+
+            # Step 2: split into two halves
+            first_half = hex_str[:4]  
+            second_half = hex_str[4:] 
+            print(f"First half: {first_half}, Second half: {second_half}")
+
+            # Step 3: convert halves into ARM assembly
+            # (example: MOVW/MOVT for lower/upper 16 bits)
+            asm_first = f"MOVZ W0, #0x{second_half}"
+            asm_second = f"MOVK W0, #0x{first_half}, LSL #16"
+
+            # Step 4: assemble to ARM64 hex
+            hex_first = convert_asm_to_arm64_hex_new(asm_first)
+            hex_second = convert_asm_to_arm64_hex_new(asm_second)
+
+            patches = f'''003cb1ac {hex_first}
+003cb1b0 {hex_second}
+003cb1b4 C003271E'''
+            
+        else:
+            patches = f'''003FA89C E87A0FEA
+007D9444 040A85EE
+007D9448 {hex_value}
+007D944C 010A20EE
+007D9450 1285F0EA'''
 
         patch_content = f'''@nsobid-{nsobidid}
 
@@ -41,11 +70,7 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
 @flag offset_shift 0x100
 
 @enabled
-003FA89C E87A0FEA
-007D9444 040A85EE
-007D9448 {hex_value}
-007D944C 010A20EE
-007D9450 1285F0EA
+{patches}
 @disabled
 
 {visual_fix}

@@ -16,7 +16,7 @@ from threading import Thread
 import shutil
 from download import download_extract_copy
 from patch import create_patch_files
-from functions import float2hex
+from functions import *
 import getpass
 from script import patch_blarc
 from PIL import Image
@@ -46,10 +46,10 @@ import pyautogui
 #### Create Window ####
 #######################
 
-tool_version = "4.0.0"
+tool_version = "4.1.0"
 
 root = customtkinter.CTk()
-root.title(f"Fayaz's Settings {tool_version} for Mario Kart 8 Deluxe 3.0.3")
+root.title(f"Fayaz's Settings {tool_version} for Mario Kart 8 Deluxe 3.0.5")
 root.geometry("540x760")
 
 customtkinter.set_appearance_mode("system")
