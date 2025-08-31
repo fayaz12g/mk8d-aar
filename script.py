@@ -30,7 +30,7 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
     layout_map = {
                     'hash_0x196a863d': ['N_LensFlare_00', 'N_All_01'], # Title Loading
                     'hash_0xca612e43': ['L_RaceNum_00', 'L_BtTimer_Ml', 'N_BtInfoView_01', 'N_BtInfoView_00', 'L_BtStartRule_00', 'L_BtKeidoroWantedPos00', 'L_BtTeamScore_00', 'L_ShineScore_00'], # rc_RaceView_cmn_00
-                    'hash_0xb061c76e': ['L_BtScore_00', 'L_BtCoinCount_00', 'L_BtKeidoroCoin_00', 'L_Alarm_00', 'L_Alarm_01', 'N_ItemBoxPos_00', 'L_Rank_00', 'L_LapCoin_00'], # rc_RaceView_1P_00
+                    'hash_0xb061c76e': ['L_BtScore_00', 'L_BtCoinCount_00', 'L_BtKeidoroCoin_00', 'L_Alarm_00', 'L_Alarm_01', 'N_ItemBoxPos_00', 'L_ItemBox_00', 'L_Rank_00', 'L_LapCoin_00'], # rc_RaceView_1P_00
                     'hash_0xa136fd7c': ['N_BtScore_MlTeamPos_00', 'L_BtCoinCount_00', 'L_BtKeidoroCoin_00', 'L_BtStartRule_00'], # rc_RaceView_2P_MI
                     'hash_0x639520ee': ['N_BtScore_MlTeamPos_00', 'L_BtCoinCount_00', 'L_BtKeidoroCoin_00', 'L_BtStartRule_00'], # rc_RaceView_4P_MI
                     'hash_0x4141b313': ['N_All_00'], # rc_Result_00

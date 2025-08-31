@@ -46,8 +46,8 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
 
             # Step 3: convert halves into ARM assembly
             # (example: MOVW/MOVT for lower/upper 16 bits)
-            asm_first = f"MOVZ W0, #0x{second_half}"
-            asm_second = f"MOVK W0, #0x{first_half}, LSL #16"
+            asm_first = f"MOVZ W30, #0x{second_half}"
+            asm_second = f"MOVK W30, #0x{first_half}, LSL #16"
 
             # Step 4: assemble to ARM64 hex
             hex_first = convert_asm_to_arm64_hex_new(asm_first)
