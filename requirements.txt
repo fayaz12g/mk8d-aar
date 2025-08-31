@@ -1,0 +1,6 @@
+customtkinter
+setuptools
+tk
+keystone
+pyautogui
+keystone-engine
