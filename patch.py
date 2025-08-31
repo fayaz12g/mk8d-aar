@@ -8,27 +8,32 @@ import math
 from functions import calculate_rounded_ratio, convert_asm_to_arm64_hex, float2hex
 
 def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
-    visual_fixesa = visual_fixes[0]
-    visual_fixesb = visual_fixes[1]
     scaling_factor = float(scaling_factor)
     ratio_value = float(ratio_value)
     print(f"The scaling factor is {scaling_factor}.")
     rounded_ratio = functions.calculate_rounded_ratio(float(ratio_value))
     asm_code = functions.generate_asm_code(rounded_ratio)
     hex_value = functions.convert_asm_to_arm64_hex(asm_code)
-    version_variables = ["3.0.1", "3.0.3"]
+    version_variables = ["3.0.1", "3.0.3", "3.0.4", "3.0.5"]
     for version_variable in version_variables:
         file_name = f"main-{version_variable}.pchtxt"
         file_path = os.path.join(patch_folder, file_name)
 
         if version_variable == "3.0.1":
             nsobidid = "9EF5CAA2D5B933C772358C5AA6FABA15"
-            visual_fix = visual_fixesa
+            visual_fix = visual_fixes[0]
 
-        if version_variable == "3.0.3":
+        elif version_variable == "3.0.3":
             nsobidid = "6A85262F21B903649BD7C62628D26E43"
-            visual_fix = visual_fixesb
+            visual_fix = visual_fixes[1]
             
+        elif version_variable == "3.0.4":
+            nsobidid = "2452C49BC26EC15904C507A34B6F16AE"
+            visual_fix = visual_fixes[2]
+
+        elif version_variable == "3.0.5":
+            nsobidid = "FE941ED5BA14BE5D505698DA1BBF4FE7"
+            visual_fix = visual_fixes[3]
 
         patch_content = f'''@nsobid-{nsobidid}
 

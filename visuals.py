@@ -165,7 +165,126 @@ def create_visuals(do_split60, do_disabledynamic, do_nosteer, do_dofscaler, do_f
 
 @stop
 '''
+    
+    visuals3_0_4 = f'''// 60 FPS in Splitscreen
+@{split60}
+00afa414 C0035FD6
+@disabled
+
+// Dynamic Res Disable
+@{dynamic}
+003c3640 09F0A752
+@disabled
+
+// Disable Steer Assist
+@disabled
+0018B764 0000A0E3
+@disabled
+
+// DOF Scaler Fix
+@{dofscaler}
+00ac062c C0035FD6
+@disabled
+
+// Force FXAA Off
+@disabled
+006B54F4 00F020E3
+@disabled
+
+// Force FXAA On
+@disabled
+006B590C 00F020E3
+@disabled
+
+// Force FXAA On - Scaler Fix
+@disabled
+006B56F8 3F94A0E3
+006B590C 00F020E3
+@disabled
+
+// LOD Enhancement
+@{lodenhance}
+00a65dc0 E003271E
+00641e88 E003271E
+@disabled
+
+// First Place Crown
+@disabled
+00551D14 D00A05EB030052E3
+0069485C 082090E5010052E3090000CA21002DE9045091E5015A45E2D85045E23C0095E50B5190E7240095E5000050E32100BDE80150A0030EF0A0E1
+@disabled
+
+// Colored Yoshi and Birdo CPU
+@disabled
+0054810C A23205EB
+00548054 D03205EB
+00694B9C 1020D8E5040050E3100050132C0050130200001A0620A0E1080052E3092042C20EF0A0E1
+@disabled
+
+@stop
+'''
+
+    visuals3_0_5 = f'''// 60 FPS in Splitscreen
+@{split60}
+00AFA42C C0035FD6
+@disabled
+
+// Dynamic Res Disable
+@{dynamic}
+003C3658 09F0A752
+@disabled
+
+// Disable Steer Assist
+@disabled
+0018B764 0000A0E3
+@disabled
+
+// DOF Scaler Fix
+@{dofscaler}
+00AC0644 C0035FD6
+@disabled
+
+// Force FXAA Off
+@disabled
+006B54F4 00F020E3
+@disabled
+
+// Force FXAA On
+@disabled
+006B590C 00F020E3
+@disabled
+
+// Force FXAA On - Scaler Fix
+@disabled
+006B56F8 3F94A0E3
+006B590C 00F020E3
+@disabled
+
+// LOD Enhancement
+@{lodenhance}
+00A65DD8 00D0351E
+00641EA0 0010381E
+@disabled
+
+// First Place Crown
+@disabled
+00551D14 D00A05EB030052E3
+0069485C 082090E5010052E3090000CA21002DE9045091E5015A45E2D85045E23C0095E50B5190E7240095E5000050E32100BDE80150A0030EF0A0E1
+@disabled
+
+// Colored Yoshi and Birdo CPU
+@disabled
+0054810C A23205EB
+00548054 D03205EB
+00694B9C 1020D8E5040050E3100050132C0050130200001A0620A0E1080052E3092042C20EF0A0E1
+@disabled
+
+@stop
+'''
+
     visual_fixes.append(visuals3_0_1)
     visual_fixes.append(visuals3_0_3)
-    
+    visual_fixes.append(visuals3_0_4)
+    visual_fixes.append(visuals3_0_5)
+
     return visual_fixes
